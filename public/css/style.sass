@@ -1,0 +1,27 @@
+@import poll
+@import profile
+
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+
+body
+    font: 100% $font-stack
+    color: $primary-color
+
+.message
+    border: 1px solid #ccc
+    padding: 10px
+    color: $primary-color
+
+.success
+    @extend .message
+    border-color: green
+
+.error
+    @extend .message
+    border-color: red
+    font-weight: bold
+
+.warning
+    @extend .message
+    border-color: yellow

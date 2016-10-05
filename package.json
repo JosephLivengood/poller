@@ -1,0 +1,15 @@
+{
+  "name": "poller",
+  "version": "0.1.0",
+  "description": "Polling app running on node/express serving static html with values loaded from MongoDB",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Joseph Livengood",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
