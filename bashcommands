@@ -1,1 +1,2 @@
 sass --watch public/css
+mongod --smallfiles (redundant, but needed to run in c9 enviroment)
