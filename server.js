@@ -6,6 +6,7 @@ var routes = require('./app/routes/index.js');
 var app = express();
 
 app.set('view engine', 'pug'); //Formerly JADE
+app.use(express.static(__dirname + '/public'));
 
 routes(app);
 

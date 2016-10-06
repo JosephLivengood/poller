@@ -19,12 +19,15 @@ module.exports = function (app) {
 	            if (err) console.log(err)
                 var collection=db.collection('polls')
                 collection.find({
-                    id: "1"
+                    id: req.params.pollid
                 }).toArray(function(err,documents){
                     if (err) console.log(err)
                     console.log(documents)
                     //res.send(documents[0].question)
-                    res.render(path + '/public/poll', {testing: 'Hello to the world!'})
+                    //WE CAN SPLIT DATA HERE, OR ON PUG FILE....
+                    //LETS DO IT HERE TO KEEP PUG CLEAN.
+                    res.render(path + '/public/poll', {question: documents[0].question,
+                    options: documents[0].options, asker: documents[0].posterid, date: documents[0].date})
                     db.close()
 	            })
 	        })
