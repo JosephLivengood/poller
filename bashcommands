@@ -5,3 +5,5 @@ node server.js
 
 //Optional, we will be rendering as temp in express, not sendfileing it
 pug public -P
+//But not really, now that most pugs use recursives based on render data from express
+//(so youll get an error)
