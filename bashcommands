@@ -1,3 +1,6 @@
 sass --watch public/css
 mongod --smallfiles (redundant, but needed to run in c9 enviroment)
 mongo (obv)
+
+//Optional, we will be rendering as temp in express, not sendfileing it
+pug public -P (why not make it pretty until i trust it?)

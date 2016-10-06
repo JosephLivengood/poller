@@ -5,6 +5,8 @@ var routes = require('./app/routes/index.js');
 
 var app = express();
 
+app.set('view engine', 'pug'); //Formerly JADE
+
 routes(app);
 
 var port = process.env.PORT || 8080;

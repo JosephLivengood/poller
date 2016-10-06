@@ -23,7 +23,8 @@ module.exports = function (app) {
                 }).toArray(function(err,documents){
                     if (err) console.log(err)
                     console.log(documents)
-                    res.send(documents[0].question)
+                    //res.send(documents[0].question)
+                    res.render(path + '/public/poll', {testing: 'Hello to the world!'})
                     db.close()
 	            })
 	        })
