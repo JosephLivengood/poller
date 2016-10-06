@@ -1,2 +1,21 @@
-body
-    p Well, #{testing}
+-function prettyDate(dateString){
+    -var d = date.getDate(dateString);
+    -var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+    -var m = monthNames[date.getMonth()];
+    -var y = date.getFullYear();
+    -return m+' '+d+' '+y;
+-}
+
+doctype html
+html(lang="en")
+    head
+        title= Poller
+        link(href='/css/style.css', rel='stylesheet')
+    body
+        h2 Question: #{question}
+        - for(var i = 0; i < options.length; i++) {
+        button.btn.btn-primary#options(type='button') #{options[i].answer}
+        - }
+        hr
+        h3 Asked by user <strong> #{asker} </strong> on #{prettyDate(date)} !
+        
