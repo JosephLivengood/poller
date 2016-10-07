@@ -14,7 +14,6 @@ module.exports = function (app) {
 	
 	app.route('/poll/:pollid')
 	    .get(function (req, res) {
-	        //res.sendFile(path + '/public/poll.html')
 	        mongo.connect(url,function(err,db) {
 	            if (err) console.log(err)
                 var collection=db.collection('polls')
@@ -22,21 +21,13 @@ module.exports = function (app) {
                     id: req.params.pollid
                 }).toArray(function(err,documents){
                     if (err) console.log(err)
-                    console.log(documents)
-                    //res.send(documents[0].question)
-                    //WE CAN SPLIT DATA HERE, OR ON PUG FILE....
-                    //LETS DO IT HERE TO KEEP PUG CLEAN.
+                    console.log(documents[0].question)
                     res.render(path + '/public/poll', {question: documents[0].question,
                     options: documents[0].options, asker: documents[0].posterid, date: documents[0].date})
                     db.close()
 	            })
 	        })
 	    })
-	 
-	app.route('/api/:pollid')
-		.get(function (req, res) {
-			res.json("this isnt json, but im not reading from mongo yet");
-		});
 
 	app.route('/login')
 		.get(function (req, res) {
