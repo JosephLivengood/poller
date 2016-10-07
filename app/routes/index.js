@@ -2,6 +2,7 @@
 
 var mongo = require('mongodb').MongoClient
 var url = 'mongodb://localhost:27017/test'
+var ObjectId = require('mongodb').ObjectID;
 
 var path = process.cwd();
 
@@ -24,10 +25,31 @@ module.exports = function (app) {
 			var category = req.body.category;
 			var options = req.body.options;
 			var optionsarr = options.split(",");
+			var doc = {
+				"question": question,
+				"options": [],
+				"responses": [],
+				"posterid": "Joseph Livengood",
+				"date": new Date()
+			};
 			for (var i = 0; i < optionsarr.length; i++) {
-    			optionsarr[i] = optionsarr[i].trim();
+				doc.options[i] = {
+					"id": i,
+					"answer": optionsarr[i].trim()
+				};
 			}
-			res.send(question+category+optionsarr);
+			mongo.connect(url, function(err,db) {
+				if (err) console.log(err);
+				var collection=db.collection('polls');
+				collection.insert(doc, function(err, result) {
+					if (err) console.log(err);
+					console.log(doc._id);
+					res.statusCode = 302;
+					res.setHeader("Location", "/poll/"+doc._id);
+					res.end();
+				});
+			});
+			
 		});
 	
 	app.route('/poll/:pollid')
@@ -36,7 +58,7 @@ module.exports = function (app) {
 	            if (err) console.log(err);
                 var collection=db.collection('polls');
                 collection.find({
-                    id: req.params.pollid
+                    _id: new ObjectId(req.params.pollid)
                 }).toArray(function(err,documents){
                     if (err) console.log(err);
                     console.log(documents[0].question);

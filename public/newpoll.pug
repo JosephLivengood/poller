@@ -18,7 +18,7 @@ html(lang="en")
                     form(method='POST' action='/registerpoll')
                       div.form-group
                         label(for='question') Question:
-                        input#question.form-control(type='text', placeholder='Be sure to be original and imaginative!' name='question')
+                        input#question.form-control(type='text', placeholder='Be sure to be original and imaginative!' name='question' required='')
                       div.form-group
                         label(for='category') Select Category
                         select#selectbasic.form-control(name='category')
@@ -29,7 +29,7 @@ html(lang="en")
                             option(value='ot') Off-Topic
                       div.form-group
                         label(for='options') Options:
-                        textarea#textarea.form-control(name='options' placeholder='Entries must be seperated by commas ( , )')
+                        textarea#textarea.form-control(name='options' placeholder='Entries must be seperated by commas ( , )' required='')
                       button.btn.btn-primary(type='submit') Submit Poll!
                       
         script( src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js' )
