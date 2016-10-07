@@ -1,44 +1,17 @@
 h2 {
   color: blue; }
 
-.twitter-profile {
-  width: 350px;
-  height: 200px;
-  border-radius: 3px;
-  margin: 86px auto 0 auto;
-  background-color: #EEE;
-  text-align: center;
-  color: #000; }
-  .twitter-profile p {
-    margin: 0 0 0 16px;
-    text-align: left; }
-    .twitter-profile p:first-child {
-      padding-top: 16px; }
-    .twitter-profile p:nth-child(5) {
-      margin-bottom: 16px; }
-
-.profile-value {
-  font-weight: 400; }
-
-span {
-  font-weight: 500; }
-
-.twitter-profile > img {
-  padding-top: 16px;
-  margin-bottom: 16px; }
-.twitter-profile .menu:hover {
-  color: #FFA000; }
-.twitter-profile .menu:active {
-  color: #FF630D; }
-
-#menu-divide {
-  color: #FFFFFF;
-  display: inline;
-  margin: 0; }
-
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
+
+.jumbotron {
+  margin: 10%;
+  padding-bottom: 25px;
+  padding-top: 25px; }
+
+#indexprogress {
+  margin: 20px 25% 0px 25%; }
 
 .message, .success, .error, .warning {
   border: 1px solid #ccc;
