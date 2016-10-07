@@ -18,6 +18,18 @@ module.exports = function (app) {
 			res.render(path + '/public/newpoll')
 		});
 	
+	app.route('/registerpoll')
+		.post(function (req, res) {
+			var question = req.body.question;
+			var category = req.body.category;
+			var options = req.body.options;
+			var optionsarr = options.split(",");
+			for (var i = 0; i < optionsarr.length; i++) {
+    			optionsarr[i] = optionsarr[i].trim();
+			}
+			res.send(question+category+optionsarr);
+		});
+	
 	app.route('/poll/:pollid')
 	    .get(function (req, res) {
 	        mongo.connect(url,function(err,db) {
