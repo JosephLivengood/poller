@@ -3,8 +3,8 @@
 var mongo = require('mongodb').MongoClient
 var url = 'mongodb://localhost:27017/test'
 var ObjectId = require('mongodb').ObjectID;
-
 var path = process.cwd();
+var VoteHandler = require(path + '/app/controllers/voteHandler.server.js');
 
 module.exports = function (app) {
 
@@ -19,14 +19,13 @@ module.exports = function (app) {
 			res.render(path + '/public/newpoll')
 		});
 	
-	app.route('/registerpoll')
+	app.route('/API/registerpoll')
 		.post(function (req, res) {
-			var question = req.body.question;
-			var category = req.body.category;
 			var options = req.body.options;
 			var optionsarr = options.split(",");
 			var doc = {
-				"question": question,
+				"question": req.body.question,
+				"category": req.body.category,
 				"options": [],
 				"responses": [],
 				"posterid": "Joseph Livengood",
@@ -52,7 +51,17 @@ module.exports = function (app) {
 			
 		});
 	
+	app.route('/poll/:pollid/results')
+		.get(function (req, res) {
+			//-
+		});
+	
 	app.route('/poll/:pollid')
+		//.post(function (req, res) {})
+		.post(function(req, res){
+			console.log(req.body.option);
+			VoteHandler.addVote;
+		})
 	    .get(function (req, res) {
 	        mongo.connect(url,function(err,db) {
 	            if (err) console.log(err);
