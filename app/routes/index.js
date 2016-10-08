@@ -7,16 +7,17 @@ var path = process.cwd();
 var VoteHandler = require(path + '/app/controllers/voteHandler.server.js');
 
 module.exports = function (app) {
+	
+	var voteHandler = new VoteHandler();
 
 	app.route('/')
 		.get(function (req, res) {
-			//res.sendFile(path + '/public/index.html');
-			res.render(path + '/public/index')
+			res.render(path + '/public/index');
 		});
 		
 	app.route('/newpoll')
 		.get(function (req, res) {
-			res.render(path + '/public/newpoll')
+			res.render(path + '/public/newpoll');
 		});
 	
 	app.route('/API/registerpoll')
@@ -57,11 +58,10 @@ module.exports = function (app) {
 		});
 	
 	app.route('/poll/:pollid')
-		//.post(function (req, res) {})
-		.post(function(req, res){
-			console.log(req.body.option);
-			VoteHandler.addVote;
-			res.redirect('/poll/'+req.params.pollid+'/results');
+		.post(function(req, res) {
+			//console.log(req.body.option);
+			voteHandler.addVote(req, res);
+			//res.redirect('/poll/'+req.params.pollid+'/results');
 		})
 	    .get(function (req, res) {
 	        mongo.connect(url,function(err,db) {
