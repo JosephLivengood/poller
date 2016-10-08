@@ -1,7 +1,7 @@
 'use strict';
 
-var mongo = require('mongodb').MongoClient
-var url = 'mongodb://localhost:27017/test'
+var mongo = require('mongodb').MongoClient;
+var url = 'mongodb://localhost:27017/test';
 var ObjectId = require('mongodb').ObjectID;
 var path = process.cwd();
 var VoteHandler = require(path + '/app/controllers/voteHandler.server.js');
@@ -38,7 +38,7 @@ module.exports = function (app) {
 					"answer": optionsarr[i].trim()
 				};
 			}
-			mongo.connect(url, function(err,db) {
+			mongo.connect(url, function(err, db) {
 				if (err) console.log(err);
 				var collection=db.collection('polls');
 				collection.insert(doc, function(err, result) {
@@ -54,14 +54,21 @@ module.exports = function (app) {
 	
 	app.route('/poll/:pollid/results')
 		.get(function (req, res) {
-			res.send('testing');
+			mongo.connect(url,function(err,db) {
+				if (err) console.log(err);
+                var collection=db.collection('polls');
+                collection.find({
+                    _id: new ObjectId(req.params.pollid)
+                }).toArray(function(err,documents){
+                	if (err) console.log(err);
+                	res.send(documents[0].responses);
+                });
+			});
 		});
 	
 	app.route('/poll/:pollid')
 		.post(function(req, res) {
-			//console.log(req.body.option);
 			voteHandler.addVote(req, res);
-			//res.redirect('/poll/'+req.params.pollid+'/results');
 		})
 	    .get(function (req, res) {
 	        mongo.connect(url,function(err,db) {
