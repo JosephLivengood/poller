@@ -20,12 +20,10 @@ module.exports = function (app) {
 		});
 		
 	app.route('/newpoll')
+		.post(pollHandler.addPoll)
 		.get(function (req, res) {
 			res.render(path + '/public/newpoll');
 		});
-	
-	app.route('/API/registerpoll')
-		.post(pollHandler.addPoll);
 	
 	app.route('/poll/:pollid/results')
 		.get(resultsHandler.sendArrayResults);
