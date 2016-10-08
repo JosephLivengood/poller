@@ -53,7 +53,7 @@ module.exports = function (app) {
 	
 	app.route('/poll/:pollid/results')
 		.get(function (req, res) {
-			//-
+			res.send('testing');
 		});
 	
 	app.route('/poll/:pollid')
@@ -61,6 +61,7 @@ module.exports = function (app) {
 		.post(function(req, res){
 			console.log(req.body.option);
 			VoteHandler.addVote;
+			res.redirect('/poll/'+req.params.pollid+'/results');
 		})
 	    .get(function (req, res) {
 	        mongo.connect(url,function(err,db) {
