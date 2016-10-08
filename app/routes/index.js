@@ -1,8 +1,5 @@
 'use strict';
 
-var mongo = require('mongodb').MongoClient;
-var url = 'mongodb://localhost:27017/test';
-var ObjectId = require('mongodb').ObjectID;
 var path = process.cwd();
 var VoteHandler = require(path + '/app/controllers/voteHandler.server.js');
 var PollHandler = require(path + '/app/controllers/pollHandler.server.js');
@@ -15,15 +12,11 @@ module.exports = function (app) {
 	var resultsHandler = new ResultsHandler();
 
 	app.route('/')
-		.get(function (req, res) {
-			res.render(path + '/public/index');
-		});
+		.get(function (req, res) { res.render(path + '/public/index'); });
 		
 	app.route('/newpoll')
 		.post(pollHandler.addPoll)
-		.get(function (req, res) {
-			res.render(path + '/public/newpoll');
-		});
+		.get(function (req, res) { res.render(path + '/public/newpoll'); });
 	
 	app.route('/poll/:pollid/results')
 		.get(resultsHandler.sendArrayResults);
@@ -33,19 +26,12 @@ module.exports = function (app) {
 		.get(pollHandler.loadPoll);
 
 	app.route('/login')
-		.get(function (req, res) {
-			res.sendFile(path + '/public/login.html');
-		});
+		.get(function (req, res) { res.sendFile(path + '/public/login.html'); });
 
 	app.route('/logout')
-		.get(function (req, res) {
-			req.logout();
-			res.redirect('/login');
-		});
+		.get(function (req, res) { req.logout(); res.redirect('public/login.html'); });
 		
 	app.route('/profile')
-		.get(function (req, res) {
-			res.sendFile(path + '/public/user.html');
-		});
+		.get(function (req, res) { res.sendFile(path + '/public/user.html'); });
 
 };
