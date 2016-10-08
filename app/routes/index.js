@@ -6,11 +6,13 @@ var ObjectId = require('mongodb').ObjectID;
 var path = process.cwd();
 var VoteHandler = require(path + '/app/controllers/voteHandler.server.js');
 var PollHandler = require(path + '/app/controllers/pollHandler.server.js');
+var ResultsHandler = require(path + '/app/controllers/resultsHandler.server.js');
 
 module.exports = function (app) {
 	
 	var voteHandler = new VoteHandler();
 	var pollHandler = new PollHandler();
+	var resultsHandler = new ResultsHandler();
 
 	app.route('/')
 		.get(function (req, res) {
@@ -26,18 +28,7 @@ module.exports = function (app) {
 		.post(pollHandler.addPoll);
 	
 	app.route('/poll/:pollid/results')
-		.get(function (req, res) {
-			mongo.connect(url,function(err,db) {
-				if (err) console.log(err);
-                var collection=db.collection('polls');
-                collection.find({
-                    _id: new ObjectId(req.params.pollid)
-                }).toArray(function(err,documents){
-                	if (err) console.log(err);
-                	res.send(documents[0].responses);
-                });
-			});
-		});
+		.get(resultsHandler.sendArrayResults);
 	
 	app.route('/poll/:pollid')
 		.post(voteHandler.addVote)

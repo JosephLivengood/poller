@@ -7,8 +7,6 @@ var ObjectId = require('mongodb').ObjectID;
 function VoteHandler () {
     
     this.addVote = function(req, res) {
-        console.log(req.body.option);
-        
         mongo.connect(url, function(err, db) {
             if (err) console.log(err);
             var collection=db.collection('polls');
@@ -26,9 +24,6 @@ function VoteHandler () {
                 }
             );
         });
-        
-        
-        
         res.redirect('/poll/'+req.params.pollid+'/results');
     };
     
