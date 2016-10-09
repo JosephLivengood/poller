@@ -15,9 +15,38 @@ function ResultsHandler () {
                 _id: new ObjectId(req.params.pollid)
             }).toArray(function(err,documents){
             	if (err) console.log(err);
-            	res.send(documents[0].responses);
+            	var aggdata = documents[0].options;
+            	for (var i = 0; i < aggdata.length; i++) {
+            	    aggdata[i].result = 0;
+            	}
+            	for (var i = 0; i < documents[0].responses.length; i++) {
+            	    aggdata[documents[0].responses[i].response].result++;
+            	}
+            	aggdata.sort(function(a, b) { return (b.result) - (a.result); });
+            	console.log(aggdata);
+            	res.send(aggdata);
+            	
+            	//res.render(path + '/public/results',{test: 'test'})
             });
 		});
+    };
+    
+    this.calcResults = function(req, res) {
+		mongo.connect(url,function(err,db) {
+			if (err) console.log(err);
+            var collection=db.collection('polls');
+            var RESULTS = [];
+            collection.find({
+                _id: new ObjectId(req.params.pollid)
+            }).toArray(function(err,documents){
+            	if (err) console.log(err);
+            	RESULTS = documents[0].responses;
+            });
+            console.log(RESULTS);
+            res.send(RESULTS);
+            
+		});
+        
     };
     
 }
