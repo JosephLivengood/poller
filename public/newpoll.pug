@@ -1,32 +1,31 @@
 doctype html
 html(lang="en")
-    head
-        include universal/head
- 
-    body
+  head
+    include universal/head
     
-        include universal/nav
+  body
+    include universal/nav
     
-        block content
-            .main.container
-                .row
-                  .col-md-6.col-md-offset-3
-                    h1.display-4.m-b-2 New Poll
-                    form(method='POST' action='?')
-                      div.form-group
-                        label(for='question') Question:
-                        input#question.form-control(type='text', placeholder='Be sure to be original and imaginative!' name='question' required='')
-                      div.form-group
-                        label(for='category') Select Category
-                        select#selectbasic.form-control(name='category')
-                            option(value='rs') General Runescape
-                            option(value='rs3') Runescape3
-                            option(value='osrs') Os Runescape
-                            option(value='dmm') Deadman Mode
-                            option(value='ot') Off-Topic
-                      div.form-group
-                        label(for='options') Options:
-                        textarea#textarea.form-control(name='options' placeholder='Entries must be seperated by commas ( , )' required='')
-                      button.btn.btn-primary(type='submit') Submit Poll!
-                      
-        include universal/script
+    block content
+      .main.container
+        .row
+          .col-md-6.col-md-offset-3
+            h1.display-4.m-b-2 New Poll
+            form(method='POST' action='?')
+              div.form-group
+                label(for='question') Question:
+                input#question.form-control(type='text', placeholder='Be sure to be original and imaginative!' name='question' required='')
+              div.form-group
+                label(for='category') Select Category
+                select#selectbasic.form-control(name='category')
+                  option(value='rs') General Runescape
+                  option(value='rs3') Runescape3
+                  option(value='osrs') Os Runescape
+                  option(value='dmm') Deadman Mode
+                  option(value='ot') Off-Topic
+              div.form-group
+                label(for='options') Options:
+                textarea#textarea.form-control(name='options' placeholder='Entries must be seperated by commas ( , )' required='')
+              button.btn.btn-primary(type='submit') Submit Poll!
+              
+    include universal/script
