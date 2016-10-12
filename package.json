@@ -1,6 +1,6 @@
 {
   "name": "poller",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "description": "Polling app running on node/express serving static html with values loaded from MongoDB",
   "main": "server.js",
   "scripts": {

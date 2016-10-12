@@ -9,7 +9,7 @@ var app = express();
 //To support posting of data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-  extended: true
+    extended: true
 }));
 
 app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
