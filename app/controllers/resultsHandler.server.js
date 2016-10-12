@@ -24,29 +24,10 @@ function ResultsHandler () {
             	}
             	aggdata.sort(function(a, b) { return (b.result) - (a.result); });
             	console.log(aggdata);
-            	res.send(aggdata);
             	
-            	//res.render(path + '/public/results',{test: 'test'})
+            	res.render(path + '/public/results',{results: aggdata})
             });
 		});
-    };
-    
-    this.calcResults = function(req, res) {
-		mongo.connect(url,function(err,db) {
-			if (err) console.log(err);
-            var collection=db.collection('polls');
-            var RESULTS = [];
-            collection.find({
-                _id: new ObjectId(req.params.pollid)
-            }).toArray(function(err,documents){
-            	if (err) console.log(err);
-            	RESULTS = documents[0].responses;
-            });
-            console.log(RESULTS);
-            res.send(RESULTS);
-            
-		});
-        
     };
     
 }
