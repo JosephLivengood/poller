@@ -1,3 +1,8 @@
+//DATA PASSED THROUGH:
+//poll[question, category, posterid, totalrespones]
+//results[{id, answer, result},...]
+//date
+
 doctype html
 html(lang="en")
     head
@@ -7,6 +12,47 @@ html(lang="en")
     
         include universal/nav
         
-        //
+        block content
+            .main.container
+                .row
+                  .col-md-6.col-md-offset-3
+                    center
+                        h2 #{pollinfo[0]}
+                        p #{pollinfo[4]} Responses!
+                        - for(var i = 0; i < results.length; i++) {
+                        p #{results[i].answer}: #{percentize(results[i].result/pollinfo[3])}% (#{results[i].result})
+                        - }
+                        .progress
+                            .progress-bar.progress-bar-success.active.progress-bar-striped#top1(role='progressbar', style='width:1%')
+                                | #{results[0].answer}
+                            .progress-bar.progress-bar-warning#top2(role='progressbar', style='width:1%')
+                                | #{results[1].answer}
+                            .progress-bar.progress-bar-danger#top3(role='progressbar', style='width:1%')
+                                | #{results[2].answer}
+                        hr
+                        p Asked by user <strong> #{pollinfo[2]} </strong> on #{prettyDate(date)} !
         
         include universal/script
+        
+        script.
+            top1 = "#{percentize(results[0].result/pollinfo[3])}";
+            top2 = "#{percentize(results[1].result/pollinfo[3])}";
+            top3 = "#{percentize(results[2].result/pollinfo[3])}";
+            document.getElementById("top1").style.width = top1+'%';
+            document.getElementById("top2").style.width = top2+'%';
+            document.getElementById("top3").style.width = top3+'%';
+        
+//FUNCTIONS
+
+-function percentize(i){
+    -var j = Math.round(i * 1000) / 10;
+    -return j;
+-}
+
+-function prettyDate(dateString){
+    -var d = date.getDate(dateString);
+    -var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+    -var m = monthNames[date.getMonth()];
+    -var y = date.getFullYear();
+    -return m+' '+d+' '+y;
+-}

@@ -16,6 +16,8 @@ function ResultsHandler () {
             }).toArray(function(err,documents){
             	if (err) console.log(err);
             	var aggdata = documents[0].options;
+            	var poll = [documents[0].question,documents[0].category,documents[0].posterid,documents[0].responses.length];
+            	console.log(poll);
             	for (var i = 0; i < aggdata.length; i++) {
             	    aggdata[i].result = 0;
             	}
@@ -25,7 +27,7 @@ function ResultsHandler () {
             	aggdata.sort(function(a, b) { return (b.result) - (a.result); });
             	console.log(aggdata);
             	
-            	res.render(path + '/public/results',{results: aggdata})
+            	res.render(path + '/public/results',{results: aggdata, pollinfo: poll, date: documents[0].date});
             });
 		});
     };

@@ -12,7 +12,7 @@ html(lang="en")
                 .row
                   .col-md-6.col-md-offset-3
                     center
-                        h2 Question: #{question}
+                        h2 #{question}
                         form(method='POST')
                             - for(var i = 0; i < options.length; i++) {
                             div.form-group
@@ -25,8 +25,8 @@ html(lang="en")
  
 //FUNCTIONS
 
--function prettyDate(dateString){
-    -var d = date.getDate(dateString);
+-function prettyDate(i){
+    -var d = date.getDate(i);
     -var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
     -var m = monthNames[date.getMonth()];
     -var y = date.getFullYear();
