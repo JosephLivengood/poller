@@ -1,24 +1,11 @@
--function prettyDate(dateString){
-    -var d = date.getDate(dateString);
-    -var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
-    -var m = monthNames[date.getMonth()];
-    -var y = date.getFullYear();
-    -return m+' '+d+' '+y;
--}
-
 doctype html
 html(lang="en")
     head
-        //-title= Poller
-        link(href='/css/style.css', rel='stylesheet')
-        meta( charset='utf-8' )
-        meta( http-equiv='X-UA-Compatible', content='IE=edge' )
-        meta( name='viewport', content='width=device-width, initial-scale=1.0' )
-        meta( name='description', content='' )
-        link(href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/flatly/bootstrap.min.css", rel="stylesheet")
+        include universal/head
+        
     body
         
-        include nav
+        include universal/nav
         
         block content
             .main.container
@@ -34,5 +21,12 @@ html(lang="en")
                         hr
                         p Asked by user <strong> #{asker} </strong> on #{prettyDate(date)} !
                         
-                        script( src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js' )
-                        
+        include universal/script
+        
+-function prettyDate(dateString){
+    -var d = date.getDate(dateString);
+    -var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+    -var m = monthNames[date.getMonth()];
+    -var y = date.getFullYear();
+    -return m+' '+d+' '+y;
+-}
