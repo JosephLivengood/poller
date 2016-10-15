@@ -7,15 +7,31 @@ var path = process.cwd();
 
 function RecentsHandler () {
     
-    this.justVoted = function() {
-    
+    /*
+    *   Inserts voted on QUESTION and ID in capped db collection. Max 50.
+    *   Used by index to display trending polls being actively voted on.
+    *   db.createCollection("recentvoted", { capped : true, size : 50000, max : 50 } )
+    */
+    this.justVoted = function(question, id) {
+        mongo.connect(url,function(err,db) {
+			if (err) console.log(err);
+            var collection=db.collection('recentvoted');
+            collection.insert({question: question, id: id}, function(err, result) {
+                if (err) console.log(err);
+                db.close();
+            });
+        });    
     };
-    
+
+    /*
+    *   Inserts the new poll's QUESTION and ID in capped db collection. Max 10.
+    *   Used by pollHandler.addPollPage to display most recently made polls.  
+    *   db.createCollection("recentcreated", { capped : true, size : 50000, max : 10 } )
+    */
     this.justCreated = function(question, id) {
         mongo.connect(url,function(err,db) {
 			if (err) console.log(err);
             var collection=db.collection('recentcreated');
-            //db.createCollection("recentcreated", { capped : true, size : 50000, max : 10 } )
             collection.insert({question: question, id: id}, function(err, result) {
                 if (err) console.log(err);
                 db.close();
@@ -25,7 +41,7 @@ function RecentsHandler () {
     
     /*
     *   getRecentPolls- Used by pollHandler.addPollPage in rendering /newpoll
-    *   @RETURNS the most recent 10 polls created in an array of objects:
+    *   @RETURNSTOTHECALLBACK the most recent 10 polls created in an array of objects:
     *       [   {question, id},
     *           {question, id}, ... ]
     */
@@ -36,7 +52,7 @@ function RecentsHandler () {
             collection.find({}).toArray(function(err, result) {
                 if (err) console.log(err);
                 var results= [];
-                for (var i = 0; i < 10; i++) {
+                for (var i = 0; i < result.length; i++) {
                     results.push({"question": result[i].question, "id": result[i].id});
                 }
                 callback(results);
@@ -48,13 +64,23 @@ function RecentsHandler () {
     /*
     *   getRecentVotes- Used by (nonexistant controller) in index
     *   NOTE- No offset as by time user loads it, it could display overlapping results, refresh will work better.
-    *   @RETURNS the most recently voted on 16 polls in an array of objects
+    *   @RETURNSTOTHECALLBACK the most recently voted on 50 polls in an array of objects
     *       [   {question, id},
     *           {question, id}, ... ]
     */
     this.getRecentVotes = function() {
-        return [ {question: "This is a success?", id: "1234567890"},
-                 {question: "IT IS!!!!!!!!!!!", id: "kjhfsjsjgfe"} ];
+        mongo.connect(url,function(err,db) {
+			if (err) console.log(err);
+            var collection=db.collection('recentvoted');
+            collection.find({}).toArray(function(err, result) {
+                if (err) console.log(err);
+                var results= [];
+                for (var i = 0; i < result.length; i++) {
+                    results.push({"question": result[i].question, "id": result[i].id});
+                }
+                //callback(results);
+            });
+        });
     };
     
 }

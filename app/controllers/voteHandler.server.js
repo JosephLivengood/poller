@@ -3,8 +3,12 @@
 var mongo = require('mongodb').MongoClient;
 var url = 'mongodb://localhost:27017/test';
 var ObjectId = require('mongodb').ObjectID;
+var path = process.cwd();
+var RecentsHandler = require(path + '/app/controllers/recentsHandler.server.js');
 
 function VoteHandler () {
+    
+    var recentsHandler = new RecentsHandler();
     
     this.addVote = function(req, res) {
         mongo.connect(url, function(err, db) {
@@ -16,11 +20,13 @@ function VoteHandler () {
                 {$push: {responses:{ "responderid": "1", "response": req.body.option}}},
                 {},
                 function(err, object) {
-                    if (err){
-                        console.warn(err.message);  // returns error if no matching object found
-                    }else{
-                        //console.dir(object);
-                    }
+                    if (err) console.log(err);
+                    collection.find({
+                        _id: new ObjectId(req.params.pollid)
+                    },{question:1}).toArray(function(err,documents){
+                        if (err) console.log(err);
+                        recentsHandler.justVoted(documents[0].question, req.params.pollid);
+                    });
                 }
             );
         });
