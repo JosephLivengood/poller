@@ -1,9 +1,16 @@
 h2 {
   color: blue; }
 
+.btn-newpoll {
+  margin-left: 25px;
+  margin-right: 25px; }
+
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
+
+.centeralign {
+  text-align: center; }
 
 .jumbotron {
   margin: 4% 12% 50px 12%;
