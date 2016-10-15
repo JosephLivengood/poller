@@ -36,7 +36,7 @@ function PollHandler () {
 		var optionsarr = options.split(",");
 		for (var i = 0; i < optionsarr.length; i++) {
 			optionsarr[i] = optionsarr[i].trim();
-			//needed for if the element is only spaces so we can filter it out
+			//needed for if the element is only spaces incase trim does not work on element so we can filter it out
 			if (optionsarr[i].charAt(0) == " ") {
           		optionsarr[i] = "";
 			}
