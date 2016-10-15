@@ -19,7 +19,7 @@ function VoteHandler () {
                     if (err){
                         console.warn(err.message);  // returns error if no matching object found
                     }else{
-                        console.dir(object);
+                        //console.dir(object);
                     }
                 }
             );

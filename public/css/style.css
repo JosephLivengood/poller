@@ -6,7 +6,8 @@
   margin-top: 50px; }
 
 .recent-polls {
-  size: 12px; }
+  size: 12px;
+  margin: 0px; }
 
 body {
   font: 100% Helvetica, sans-serif;

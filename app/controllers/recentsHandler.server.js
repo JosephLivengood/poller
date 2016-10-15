@@ -7,23 +7,41 @@ var path = process.cwd();
 
 function RecentsHandler () {
     
-    this.justVoted = function(req, res) {
+    this.justVoted = function() {
     
     };
     
-    this.justCreated = function(req, res) {
-        
+    this.justCreated = function(question, id) {
+        mongo.connect(url,function(err,db) {
+			if (err) console.log(err);
+            var collection=db.collection('recentcreated');
+            //db.createCollection("recentcreated", { capped : true, size : 50000, max : 10 } )
+            collection.insert({question: question, id: id}, function(err, result) {
+                if (err) console.log(err);
+                db.close();
+            });
+        });
     };
     
     /*
     *   getRecentPolls- Used by pollHandler.addPollPage in rendering /newpoll
-    *   @RETURNS the most recent 7 polls created in an array of objects:
+    *   @RETURNS the most recent 10 polls created in an array of objects:
     *       [   {question, id},
     *           {question, id}, ... ]
     */
-    this.getRecentPolls = function() {
-        return [ {question: "This is a success?", id: "1234567890"},
-                 {question: "IT IS!!!!!!!!!!!", id: "kjhfsjsjgfe"} ];
+    this.getRecentPolls = function(callback) {
+        mongo.connect(url,function(err,db) {
+			if (err) console.log(err);
+            var collection=db.collection('recentcreated');
+            collection.find({}).toArray(function(err, result) {
+                if (err) console.log(err);
+                var results= [];
+                for (var i = 0; i < 10; i++) {
+                    results.push({"question": result[i].question, "id": result[i].id});
+                }
+                callback(results);
+            });
+        });
     };
     
     

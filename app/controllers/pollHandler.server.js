@@ -27,8 +27,9 @@ function PollHandler () {
     };
     
     this.addPollPage = function(req, res) {
-    	var recents = recentsHandler.getRecentPolls();
-    	res.render(path + '/public/newpoll', {recents: recents});
+    	recentsHandler.getRecentPolls(function(i) {
+    		res.render(path + '/public/newpoll', {recents: i});
+    	});
     };
     
     this.addPoll = function(req, res) {
@@ -61,7 +62,7 @@ function PollHandler () {
 			var collection=db.collection('polls');
 			collection.insert(doc, function(err, result) {
 				if (err) console.log(err);
-				console.log(doc._id);
+				recentsHandler.justCreated(doc.question, doc._id);
 				res.statusCode = 302;
 				res.setHeader("Location", "/poll/"+doc._id);
 				res.end();
