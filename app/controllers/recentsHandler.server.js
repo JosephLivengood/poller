@@ -26,6 +26,19 @@ function RecentsHandler () {
                  {question: "IT IS!!!!!!!!!!!", id: "kjhfsjsjgfe"} ];
     };
     
+    
+    /*
+    *   getRecentVotes- Used by (nonexistant controller) in index
+    *   NOTE- No offset as by time user loads it, it could display overlapping results, refresh will work better.
+    *   @RETURNS the most recently voted on 16 polls in an array of objects
+    *       [   {question, id},
+    *           {question, id}, ... ]
+    */
+    this.getRecentVotes = function() {
+        return [ {question: "This is a success?", id: "1234567890"},
+                 {question: "IT IS!!!!!!!!!!!", id: "kjhfsjsjgfe"} ];
+    };
+    
 }
 
 module.exports = RecentsHandler;

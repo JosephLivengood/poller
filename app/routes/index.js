@@ -4,15 +4,17 @@ var path = process.cwd();
 var VoteHandler = require(path + '/app/controllers/voteHandler.server.js');
 var PollHandler = require(path + '/app/controllers/pollHandler.server.js');
 var ResultsHandler = require(path + '/app/controllers/resultsHandler.server.js');
+var IndexHandler = require(path + '/app/controllers/indexHandler.server.js');
 
 module.exports = function (app) {
 	
 	var voteHandler = new VoteHandler();
 	var pollHandler = new PollHandler();
 	var resultsHandler = new ResultsHandler();
+	var indexHandler = new IndexHandler();
 
 	app.route('/')
-		.get(function (req, res) { res.render(path + '/public/index'); });
+		.get(indexHandler.displayHome);
 		
 	app.route('/newpoll')
 		.post(pollHandler.addPoll)
