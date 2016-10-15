@@ -4,8 +4,11 @@ var mongo = require('mongodb').MongoClient;
 var url = 'mongodb://localhost:27017/test';
 var ObjectId = require('mongodb').ObjectID;
 var path = process.cwd();
+var RecentsHandler = require(path + '/app/controllers/recentsHandler.server.js');
 
 function PollHandler () {
+	
+	var recentsHandler = new RecentsHandler();
     
     this.loadPoll = function(req, res) {
         mongo.connect(url,function(err,db) {
@@ -21,6 +24,11 @@ function PollHandler () {
                 db.close();
             });
         });
+    };
+    
+    this.addPollPage = function(req, res) {
+    	var recents = recentsHandler.getRecentPolls();
+    	res.render(path + '/public/newpoll', {recents: recents});
     };
     
     this.addPoll = function(req, res) {

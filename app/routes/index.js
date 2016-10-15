@@ -16,7 +16,7 @@ module.exports = function (app) {
 		
 	app.route('/newpoll')
 		.post(pollHandler.addPoll)
-		.get(function (req, res) { res.render(path + '/public/newpoll'); });
+		.get(pollHandler.addPollPage);
 	
 	app.route('/poll/:pollid/results')
 		.get(resultsHandler.sendArrayResults);

@@ -29,6 +29,13 @@ html(lang="en")
               center
                 button.btn.btn-success.btn-newpoll(type='submit') Submit Poll!
                 button.btn.btn-warning.btn-newpoll(type='reset') Reset
+        .row.centeralign.top-space
+          h3 Recently asked:
+          - for (var i = 0; i < recents.length; i++) {
+          p.recent-polls
+            a(href="/poll/"+recents[i].id) #{recents[i].question}
+          - }
+          
 
     script.
       function validate() {
