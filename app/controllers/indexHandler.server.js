@@ -13,7 +13,8 @@ function IndexHandler () {
     this.displayHome = function(req, res) {
         var recents = recentsHandler.getRecentVotes();
         var isLoggedIn = false;
-        res.render(path + '/public/index', {loggedIn: isLoggedIn,recents: recents});
+        var loggedInAs = "Joseph Livengood";//user.getUsername();
+        res.render(path + '/public/index', {loggedIn: isLoggedIn,recents: recents,loggedInAs: loggedInAs});
     };
     
 }
