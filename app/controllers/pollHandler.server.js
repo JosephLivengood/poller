@@ -26,6 +26,10 @@ function PollHandler () {
     this.addPoll = function(req, res) {
         var options = req.body.options;
 		var optionsarr = options.split(",");
+		for (var i = 0; i < optionsarr.length; i++) {
+          optionsarr[i].trim();
+        }
+		optionsarr = optionsarr.filter(Boolean);
 		var doc = {
 			"question": req.body.question,
 			"category": req.body.category,
@@ -37,7 +41,7 @@ function PollHandler () {
 		for (var i = 0; i < optionsarr.length; i++) {
 			doc.options[i] = {
 				"id": i,
-				"answer": optionsarr[i].trim()
+				"answer": optionsarr[i]
 			};
 		}
 		mongo.connect(url, function(err, db) {

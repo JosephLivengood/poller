@@ -23,11 +23,11 @@ html(lang="en")
                         p #{results[i].answer}: #{percentize(results[i].result/pollinfo[3])}% (#{results[i].result})
                         - }
                         .progress
-                            .progress-bar.progress-bar-success.active.progress-bar-striped#top1(role='progressbar', style='width:1%')
+                            .progress-bar.progress-bar-success.active.progress-bar-striped#result1(role='progressbar', style='width:1%')
                                 | #{results[0].answer}
-                            .progress-bar.progress-bar-warning#top2(role='progressbar', style='width:1%')
+                            .progress-bar.progress-bar-warning#result2(role='progressbar', style='width:1%')
                                 | #{results[1].answer}
-                            .progress-bar.progress-bar-danger#top3(role='progressbar', style='width:1%')
+                            .progress-bar.progress-bar-danger#result3(role='progressbar', style='width:1%')
                                 | #{results[2].answer}
                         hr
                         p Asked by user <strong> #{pollinfo[2]} </strong> on #{prettyDate(date)} !
@@ -36,11 +36,11 @@ html(lang="en")
         
         script.
             top1 = "#{percentize(results[0].result/pollinfo[3])}";
+            document.getElementById("result1").style.width = top1+'%';
             top2 = "#{percentize(results[1].result/pollinfo[3])}";
+            document.getElementById("result2").style.width = top2+'%';
             top3 = "#{percentize(results[2].result/pollinfo[3])}";
-            document.getElementById("top1").style.width = top1+'%';
-            document.getElementById("top2").style.width = top2+'%';
-            document.getElementById("top3").style.width = top3+'%';
+            document.getElementById("result3").style.width = top3+'%';
         
 //FUNCTIONS
 
