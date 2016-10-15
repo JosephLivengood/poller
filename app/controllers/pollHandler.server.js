@@ -35,7 +35,11 @@ function PollHandler () {
         var options = req.body.options;
 		var optionsarr = options.split(",");
 		for (var i = 0; i < optionsarr.length; i++) {
-          optionsarr[i].trim();
+			optionsarr[i] = optionsarr[i].trim();
+			//needed for if the element is only spaces so we can filter it out
+			if (optionsarr[i].charAt(0) == " ") {
+          		optionsarr[i] = "";
+			}
         }
 		optionsarr = optionsarr.filter(Boolean);
 		var doc = {
