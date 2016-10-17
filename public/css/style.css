@@ -9,6 +9,53 @@
   size: 12px;
   margin: 0px; }
 
+* {
+  box-sizing: border-box; }
+
+body {
+  font-family: sans-serif; }
+
+.grid {
+  background: white;
+  max-width: 1200px; }
+  .grid:after {
+    content: "";
+    display: block;
+    clear: both; }
+
+.grid-sizer {
+  width: 20%; }
+
+.grid-item {
+  width: 19.5%;
+  height: 180px;
+  float: left;
+  background: #33b5e5;
+  border: 3px solid black;
+  border-color: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  margin: 0.25%;
+  text-align: center; }
+  .grid-item a {
+    color: white; }
+    .grid-item a:hover {
+      color: gray; }
+
+.grid-item--width2 {
+  width: 39.5%; }
+
+.grid-item--width3 {
+  width: 49.5%; }
+
+.grid-item--height2 {
+  height: 300px; }
+
+.grid-item--height3 {
+  height: 420px; }
+
+.grid-item--height4 {
+  height: 420px; }
+
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }

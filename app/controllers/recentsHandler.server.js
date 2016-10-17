@@ -65,20 +65,45 @@ function RecentsHandler () {
     *   getRecentVotes- Used by (nonexistant controller) in index
     *   NOTE- No offset as by time user loads it, it could display overlapping results, refresh will work better.
     *   @RETURNSTOTHECALLBACK the most recently voted on 50 polls in an array of objects
-    *       [   {question, id},
-    *           {question, id}, ... ]
+    *       [   {question, id, count},
+    *           {question, id, count}, ... ]
     */
-    this.getRecentVotes = function() {
+    this.getRecentVotes = function(callback) {
         mongo.connect(url,function(err,db) {
 			if (err) console.log(err);
             var collection=db.collection('recentvoted');
             collection.find({}).toArray(function(err, result) {
                 if (err) console.log(err);
+                /*
+                *   Puts most recent votes (50) in array 'results'
+                *   Creates 'counts' array to count duplicates in 'results'
+                *   Removed duplicates on this end in 'results'
+                *   Attaches count of each result to result in 'results' to return to render.
+                */
                 var results= [];
                 for (var i = 0; i < result.length; i++) {
                     results.push({"question": result[i].question, "id": result[i].id});
                 }
-                //callback(results);
+                var counts = {};
+                results.forEach(function(x) {
+                    counts[x.id] = (counts[x.id] || 0)+1; 
+                });
+                function removeDuplicates(originalArray, prop) {
+                    var newArray = [];
+                    var lookupObject  = {};
+                    for(var i in originalArray) {
+                        lookupObject[originalArray[i][prop]] = originalArray[i];
+                    }
+                    for(i in lookupObject) {
+                        newArray.push(lookupObject[i]);
+                    }
+                    return newArray;
+                }
+                results = removeDuplicates(results, 'id');
+                for (var i = 0; i < results.length; i++) {
+                    results[i].count = counts[results[i].id];
+                }
+                callback(results);
             });
         });
     };

@@ -11,10 +11,11 @@ function IndexHandler () {
     var recentsHandler = new RecentsHandler();
     
     this.displayHome = function(req, res) {
-        var recents = recentsHandler.getRecentVotes();
         var isLoggedIn = false;
         var loggedInAs = "Joseph Livengood";//user.getUsername();
-        res.render(path + '/public/index', {loggedIn: isLoggedIn,recents: recents,loggedInAs: loggedInAs});
+        recentsHandler.getRecentVotes(function(i) {
+            res.render(path + '/public/index', {loggedIn: isLoggedIn,recents: i,loggedInAs: loggedInAs});
+        });
     };
     
 }

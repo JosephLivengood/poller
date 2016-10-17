@@ -1,10 +1,13 @@
+//DATA PASSED THROUGH:
+//recents[ {id, question, count}, ... ]
+
 doctype html
 html(lang="en")
     head
         include universal/head
+        include universal/script
         
     body
-    
         include universal/nav
         
         - if(!loggedIn) {
@@ -18,6 +21,51 @@ html(lang="en")
                     div.progress#indexprogress
                         .progress-bar.progress-bar-striped.progress-bar-info.active(role='progressbar', aria-valuenow='100', aria-valuemin='0', aria-valuemax='100', style='width:100%')
         - }
-        //div#pollsquares
         
-        include universal/script
+        - var max = Math.max.apply(Math,recents.map(function(o){return o.count;}))
+        center
+            .grid
+                .grid-sizer
+                - for (var i = 0; i < recents.length; i++) {
+                    - if (recents[i].count == max) {
+                    .grid-item.grid-item--width2.grid-item--height2
+                        a(href="/poll/"+ recents[i].id ) #{recents[i].question} #{recents[i].count} votes
+                    - } else {
+                    .grid-item
+                        a(href="/poll/"+ recents[i].id ) #{recents[i].question} #{recents[i].count} votes
+                    - }
+                - }
+                
+                
+                
+                .grid-item
+                    a(href="/poll/"+ recents[1].id ) #{recents[1].question}
+                .grid-item.grid-item--width2.grid-item--height2
+                .grid-item.grid-item--height3
+                .grid-item.grid-item--height2
+                .grid-item.grid-item--width3
+                .grid-item
+                .grid-item
+                .grid-item.grid-item--height2
+                .grid-item.grid-item--width2.grid-item--height3
+                .grid-item
+                .grid-item.grid-item--height2
+                .grid-item
+                .grid-item.grid-item--width2.grid-item--height2
+                .grid-item.grid-item--width2
+                .grid-item
+                .grid-item.grid-item--height2
+                .grid-item
+                .grid-item
+                .grid-item.grid-item--height3
+                .grid-item.grid-item--height2
+                .grid-item
+                .grid-item
+                .grid-item.grid-item--height2
+                
+        script.
+            $('.grid').masonry({
+                itemSelector: '.grid-item',
+                columnWidth: '.grid-sizer',
+                percentPosition: true
+            });
