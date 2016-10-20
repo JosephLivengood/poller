@@ -12,11 +12,11 @@ function RecentsHandler () {
     *   Used by index to display trending polls being actively voted on.
     *   db.createCollection("recentvoted", { capped : true, size : 50000, max : 50 } )
     */
-    this.justVoted = function(question, id) {
+    this.justVoted = function(question, id, category) {
         mongo.connect(url,function(err,db) {
 			if (err) console.log(err);
             var collection=db.collection('recentvoted');
-            collection.insert({question: question, id: id}, function(err, result) {
+            collection.insert({question: question, id: id, category: category}, function(err, result) {
                 if (err) console.log(err);
                 db.close();
             });
@@ -65,8 +65,8 @@ function RecentsHandler () {
     *   getRecentVotes- Used by (nonexistant controller) in index
     *   NOTE- No offset as by time user loads it, it could display overlapping results, refresh will work better.
     *   @RETURNSTOTHECALLBACK the most recently voted on 50 polls in an array of objects
-    *       [   {question, id, count},
-    *           {question, id, count}, ... ]
+    *       [   {question, id, category, count},
+    *           {question, id, cetegory, count}, ... ]
     */
     this.getRecentVotes = function(callback) {
         mongo.connect(url,function(err,db) {
@@ -82,7 +82,7 @@ function RecentsHandler () {
                 */
                 var results= [];
                 for (var i = 0; i < result.length; i++) {
-                    results.push({"question": result[i].question, "id": result[i].id});
+                    results.push({"question": result[i].question, "id": result[i].id, "category": result[i].category});
                 }
                 var counts = {};
                 results.forEach(function(x) {

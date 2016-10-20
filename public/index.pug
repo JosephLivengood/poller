@@ -28,11 +28,19 @@ html(lang="en")
                 .grid-sizer
                 - for (var i = 0; i < recents.length; i++) {
                     - if (recents[i].count == max) {
-                    .grid-item.grid-item--width2.grid-item--height2
-                        a(href="/poll/"+ recents[i].id ) #{recents[i].question} #{recents[i].count} votes
+                    .grid-item.grid-item--top
+                        a(href="/poll/"+ recents[i].id ) #{recents[i].question}
+                    - } else if (recents[i].count >= max/2) {
+                        - if(recents[i].count % 2 == 1) {
+                        .grid-item.grid-item--height2
+                            a(href="/poll/"+ recents[i].id ) #{recents[i].question}
+                        - } else {
+                        .grid-item.grid-item--width2
+                            a(href="/poll/"+ recents[i].id ) #{recents[i].question}
+                        - }
                     - } else {
                     .grid-item
-                        a(href="/poll/"+ recents[i].id ) #{recents[i].question} #{recents[i].count} votes
+                        a(href="/poll/"+ recents[i].id ) #{recents[i].question}
                     - }
                 - }
                 
@@ -40,32 +48,37 @@ html(lang="en")
                 
                 .grid-item
                     a(href="/poll/"+ recents[1].id ) #{recents[1].question}
-                .grid-item.grid-item--width2.grid-item--height2
-                .grid-item.grid-item--height3
-                .grid-item.grid-item--height2
-                .grid-item.grid-item--width3
                 .grid-item
                 .grid-item
                 .grid-item.grid-item--height2
-                .grid-item.grid-item--width2.grid-item--height3
+                .grid-item
+                .grid-item
+                .grid-item
+                .grid-item
+                .grid-item
                 .grid-item
                 .grid-item.grid-item--height2
                 .grid-item
-                .grid-item.grid-item--width2.grid-item--height2
+                .grid-item.grid-item--width2
                 .grid-item.grid-item--width2
                 .grid-item
-                .grid-item.grid-item--height2
+                .grid-item
+                .grid-item.grid-item--top
                 .grid-item
                 .grid-item
-                .grid-item.grid-item--height3
                 .grid-item.grid-item--height2
                 .grid-item
                 .grid-item
                 .grid-item.grid-item--height2
                 
         script.
-            $('.grid').masonry({
+            var $grid = $('.grid').masonry({
                 itemSelector: '.grid-item',
                 columnWidth: '.grid-sizer',
-                percentPosition: true
+                percentPosition: true,
+                originLeft: false
+            });
+            $grid.on( 'click', '.grid-item', function() {
+                $( this ).toggleClass('grid-item--gigante');
+                $grid.masonry();
             });

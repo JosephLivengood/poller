@@ -25,7 +25,7 @@ function VoteHandler () {
                         _id: new ObjectId(req.params.pollid)
                     },{question:1}).toArray(function(err,documents){
                         if (err) console.log(err);
-                        recentsHandler.justVoted(documents[0].question, req.params.pollid);
+                        recentsHandler.justVoted(documents[0].question, req.params.pollid, documents[0].category);
                     });
                 }
             );

@@ -11,7 +11,7 @@ function IndexHandler () {
     var recentsHandler = new RecentsHandler();
     
     this.displayHome = function(req, res) {
-        var isLoggedIn = false;
+        var isLoggedIn = true;
         var loggedInAs = "Joseph Livengood";//user.getUsername();
         recentsHandler.getRecentVotes(function(i) {
             res.render(path + '/public/index', {loggedIn: isLoggedIn,recents: i,loggedInAs: loggedInAs});

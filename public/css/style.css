@@ -16,6 +16,7 @@ body {
   font-family: sans-serif; }
 
 .grid {
+  margin-top: 100px;
   background: white;
   max-width: 1200px; }
   .grid:after {
@@ -28,7 +29,7 @@ body {
 
 .grid-item {
   width: 19.5%;
-  height: 180px;
+  height: 100px;
   float: left;
   background: #33b5e5;
   border: 3px solid black;
@@ -36,6 +37,10 @@ body {
   border-radius: 8px;
   margin: 0.25%;
   text-align: center; }
+  .grid-item:hover {
+    background: #90CAF9;
+    border-color: rgba(0, 0, 0, 0.75);
+    cursor: pointer; }
   .grid-item a {
     color: white; }
     .grid-item a:hover {
@@ -44,11 +49,19 @@ body {
 .grid-item--width2 {
   width: 39.5%; }
 
+.grid-item--gigante {
+  width: 39.5%;
+  height: 280px; }
+
+.grid-item--top {
+  width: 39.5%;
+  height: 280px; }
+
 .grid-item--width3 {
   width: 49.5%; }
 
 .grid-item--height2 {
-  height: 300px; }
+  height: 310px; }
 
 .grid-item--height3 {
   height: 420px; }
