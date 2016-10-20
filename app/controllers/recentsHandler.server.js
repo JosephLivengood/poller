@@ -9,7 +9,7 @@ function RecentsHandler () {
     
     /*
     *   Inserts voted on QUESTION and ID in capped db collection. Max 50.
-    *   Used by index to display trending polls being actively voted on.
+    *   Used by vote controller to keep track of recent votes.
     *   db.createCollection("recentvoted", { capped : true, size : 50000, max : 50 } )
     */
     this.justVoted = function(question, id, category) {
