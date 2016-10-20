@@ -11,6 +11,18 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
-    "express": "^4.14.0"
-  }
+    "express": "^4.14.0",
+    "masonry-layout": "^4.1.1",
+    "mongodb": "^2.2.10",
+    "pug": "^2.0.0-beta6"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JosephLivengood/poller.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JosephLivengood/poller/issues"
+  },
+  "homepage": "https://github.com/JosephLivengood/poller#readme"
 }
