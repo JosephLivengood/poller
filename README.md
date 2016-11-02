@@ -1,21 +1,4 @@
 Poller!
 =====
 
-**Made in the c9 enviroment! Clone it yourself and get it running with 3 terminals:**
-
-1.  node server.js
-2.  mongod --smallfiles
-3.  sass --watch public/css
-
-
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-     
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-    
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-     
-    ----------------------------------------------------------------- 
+**Made in the c9 enviroment deployed to heroku with a AWS mongodb!**
