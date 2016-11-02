@@ -9,29 +9,29 @@ nav.navbar.navbar-default
 			a.navbar-brand(href='/') Poller
 		#bs-example-navbar-collapse-1.collapse.navbar-collapse
 			ul.nav.navbar-nav
-				li.active
+				li
 					a(href='/')
 						| Home 
 						span.sr-only (current)
 				li
-					a(href='#') About
+					a(href='/newpoll') New Poll
 				li.dropdown
 					a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
 						| Categories 
 						span.caret
 					ul.dropdown-menu
 						li
-							a(href='#') Act
+							a(href='#') nonimp
 						li
-							a(href='#') Another action
+							a(href='#') nonimp
 						li
-							a(href='#') Something else here
+							a(href='#') nonimp
 						li.divider(role='separator')
 						li
-							a(href='#') Separated link
+							a(href='#') nonimp
 						li.divider(role='separator')
 						li
-							a(href='#') One more separated link
+							a(href='#') alsononimp
 			form.navbar-form.navbar-left
 				.form-group
 					input.form-control(type='text', placeholder='Search by POLL-ID#')
@@ -52,3 +52,6 @@ nav.navbar.navbar-default
 							a(href='#') Forgot User
 						li
 							a(href='#') Forgot Pass
+
+.alert.alert-warning(role='alert')
+	p This site is a WIP. Logins are disabled and multiple voting is enabled for testing!

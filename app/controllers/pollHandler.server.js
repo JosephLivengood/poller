@@ -1,7 +1,7 @@
 'use strict';
 
 var mongo = require('mongodb').MongoClient;
-var url = 'mongodb://localhost:27017/test';
+var url = 'mongodb://admin:pass@ds141937.mlab.com:41937/poller'; //'mongodb://localhost:27017/test';
 var ObjectId = require('mongodb').ObjectID;
 var path = process.cwd();
 var RecentsHandler = require(path + '/app/controllers/recentsHandler.server.js');

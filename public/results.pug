@@ -7,11 +7,8 @@ doctype html
 html(lang="en")
     head
         include universal/head
-        
     body
-    
         include universal/nav
-        
         block content
             .main.container
                 .row
@@ -30,10 +27,9 @@ html(lang="en")
                             .progress-bar.progress-bar-danger#result3(role='progressbar', style='width:1%')
                                 | #{results[2].answer}
                         hr
-                        p Asked by user <strong> #{pollinfo[2]} </strong> on #{prettyDate(date)} !
-        
+                        p Asked by user <strong> anon </strong> on #{prettyDate(date)} !
         include universal/script
-        
+        //#{pollinfo[2]}
         script.
             top1 = "#{percentize(results[0].result/pollinfo[3])}";
             document.getElementById("result1").style.width = top1+'%';
@@ -41,7 +37,6 @@ html(lang="en")
             document.getElementById("result2").style.width = top2+'%';
             top3 = "#{percentize(results[2].result/pollinfo[3])}";
             document.getElementById("result3").style.width = top3+'%';
-        
 //FUNCTIONS
 
 -function percentize(i){

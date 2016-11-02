@@ -19,11 +19,11 @@ html(lang="en")
                                 button.btn.btn-primary#options(type='submit' name='option' value=i) #{options[i].answer}
                             - }
                         hr
-                        p Asked by user <strong> #{asker} </strong> on #{prettyDate(date)} !
+                        p Asked by user <strong> anon </strong> on #{prettyDate(date)} !
                         
         include universal/script
  
-//FUNCTIONS
+//FUNCTIONS #{asker}
 
 -function prettyDate(i){
     -var d = date.getDate(i);
