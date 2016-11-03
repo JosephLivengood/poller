@@ -66,7 +66,7 @@ function RecentsHandler () {
     *   NOTE- No offset as by time user loads it, it could display overlapping results, refresh will work better.
     *   @RETURNSTOTHECALLBACK the most recently voted on 50 polls in an array of objects
     *       [   {question, id, category, count},
-    *           {question, id, cetegory, count}, ... ]
+    *           {question, id, category, count}, ... ]
     */
     this.getRecentVotes = function(callback) {
         mongo.connect(url,function(err,db) {

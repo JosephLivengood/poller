@@ -29,17 +29,21 @@ html(lang="en")
                     - if (recents[i].count == max) {
                     .grid-item.grid-item--top
                         a(href="/poll/"+ recents[i].id ) #{recents[i].question}
+                        p #{recents[i].category}
                     - } else if (recents[i].count >= max/2) {
                         - if(recents[i].count % 2 == 1) {
                         .grid-item.grid-item--height2
                             a(href="/poll/"+ recents[i].id ) #{recents[i].question}
+                            p #{recents[i].category}
                         - } else {
                         .grid-item.grid-item--width2
                             a(href="/poll/"+ recents[i].id ) #{recents[i].question}
+                            p #{recents[i].category}
                         - }
                     - } else {
                     .grid-item
                         a(href="/poll/"+ recents[i].id ) #{recents[i].question}
+                        p #{recents[i].category}
                     - }
                 - }
                 

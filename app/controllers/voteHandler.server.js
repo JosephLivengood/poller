@@ -23,7 +23,7 @@ function VoteHandler () {
                     if (err) console.log(err);
                     collection.find({
                         _id: new ObjectId(req.params.pollid)
-                    },{question:1}).toArray(function(err,documents){
+                    },{question:1, category:1}).toArray(function(err,documents){
                         if (err) console.log(err);
                         recentsHandler.justVoted(documents[0].question, req.params.pollid, documents[0].category);
                     });
