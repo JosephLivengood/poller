@@ -1,7 +1,10 @@
 //DATA PASSED THROUGH:
+//
 //poll[question, category, posterid, totalrespones]
 //results[{id, answer, result},...]
 //date
+//latest[$RESPONSECODE(0/1/2/3/4/5/6/7/8/9),...] 0<length<21 (ie. [1,2,1,1,1,3,3,3,4,2,1,0])
+//latestunique[$RESPONSECODE(0/1/2/3/4/5/6/7/8/9),...] no duplicates (ie. [0,1,2,3,4])
 
 doctype html
 html(lang="en")
@@ -31,14 +34,16 @@ html(lang="en")
         include universal/script
         //#{pollinfo[2]}
         script.
+            test = "#{latest} AND #{latestunique}"
+            console.log(test);
             top1 = "#{percentize(results[0].result/pollinfo[3])}";
             document.getElementById("result1").style.width = top1+'%';
             top2 = "#{percentize(results[1].result/pollinfo[3])}";
             document.getElementById("result2").style.width = top2+'%';
             top3 = "#{percentize(results[2].result/pollinfo[3])}";
             document.getElementById("result3").style.width = top3+'%';
-//FUNCTIONS
 
+//FUNCTIONS
 -function percentize(i){
     -var j = Math.round(i * 1000) / 10;
     -return j;

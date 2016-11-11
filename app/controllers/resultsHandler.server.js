@@ -24,8 +24,13 @@ function ResultsHandler () {
             	    aggdata[documents[0].responses[i].response].result++;
             	}
             	aggdata.sort(function(a, b) { return (b.result) - (a.result); });
-            	
-            	res.render(path + '/public/results',{results: aggdata, pollinfo: poll, date: documents[0].date});
+            	var latestvotes = documents[0].responses.slice(Math.max(documents[0].responses.length - 20,0));
+            	var latestarr = [];
+            	for (var i = 0; i < latestvotes.length; i++) {
+            	    latestarr.push(latestvotes[i].response);
+            	}
+            	var latestuniquearr = latestarr.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
+            	res.render(path + '/public/results',{results: aggdata, pollinfo: poll, date: documents[0].date, latest: latestarr, latestunique: latestuniquearr});
             });
 		});
     };
