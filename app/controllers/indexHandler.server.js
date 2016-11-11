@@ -13,10 +13,27 @@ function IndexHandler () {
     this.displayHome = function(req, res) {
         console.log('connected');
         var isLoggedIn = false;
-        var loggedInAs = "Joseph Livengood";//user.getUsername();
-        recentsHandler.getRecentVotes(function(i) {
-            res.render(path + '/public/index', {loggedIn: isLoggedIn,recents: i,loggedInAs: loggedInAs});
-        });
+        var loggedInAs = 'Joseph Livengood';//user.getUsername();
+        switch (req.query.category) {
+            case 'test':
+                res.render(path + '/public/index', {loggedIn: true,recents: [],loggedInAs: loggedInAs});
+                break;
+            default:
+                recentsHandler.getRecentVotes(function(i) {
+                    res.render(path + '/public/index', {loggedIn: isLoggedIn,recents: i,loggedInAs: loggedInAs});
+                });
+        }
+        
+        
+        /*
+        if (req.query.category == 'test') {
+            res.render(path + '/public/index', {loggedIn: true,recents: [],loggedInAs: loggedInAs});
+        } else {
+            recentsHandler.getRecentVotes(function(i) {
+                res.render(path + '/public/index', {loggedIn: isLoggedIn,recents: i,loggedInAs: loggedInAs});
+            });
+        }
+        */
     };
     
 }
