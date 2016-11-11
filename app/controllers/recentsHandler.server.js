@@ -8,9 +8,9 @@ var path = process.cwd();
 function RecentsHandler () {
     
     /*
-    *   Inserts voted on QUESTION and ID in capped db collection. Max 50.
+    *   Inserts voted on QUESTION and ID in capped db collection. Max 300.
     *   Used by vote controller to keep track of recent votes.
-    *   db.createCollection("recentvoted", { capped : true, size : 50000, max : 50 } )
+    *   db.createCollection("recentvoted", { capped : true, size : 50000, max : 300 } )
     */
     this.justVoted = function(question, id, category) {
         mongo.connect(url,function(err,db) {
@@ -64,7 +64,7 @@ function RecentsHandler () {
     /*
     *   getRecentVotes- Used by (nonexistant controller) in index
     *   NOTE- No offset as by time user loads it, it could display overlapping results, refresh will work better.
-    *   @RETURNSTOTHECALLBACK the most recently voted on 50 polls in an array of objects
+    *   @RETURNSTOTHECALLBACK the most recently voted on 300 polls in an array of objects
     *       [   {question, id, category, count},
     *           {question, id, category, count}, ... ]
     */
@@ -75,7 +75,7 @@ function RecentsHandler () {
             collection.find({}).toArray(function(err, result) {
                 if (err) console.log(err);
                 /*
-                *   Puts most recent votes (50) in array 'results'
+                *   Puts most recent votes (300) in array 'results'
                 *   Creates 'counts' array to count duplicates in 'results'
                 *   Removed duplicates on this end in 'results'
                 *   Attaches count of each result to result in 'results' to return to render.
