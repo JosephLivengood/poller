@@ -6,6 +6,9 @@ var PollHandler = require(path + '/app/controllers/pollHandler.server.js');
 var ResultsHandler = require(path + '/app/controllers/resultsHandler.server.js');
 var IndexHandler = require(path + '/app/controllers/indexHandler.server.js');
 
+var pass = require(path + '/app/auth/passwordless.js');
+var passwordless = require('passwordless');
+
 module.exports = function (app) {
 	
 	var voteHandler = new VoteHandler();
@@ -26,6 +29,9 @@ module.exports = function (app) {
 	app.route('/poll/:pollid')
 		.post(voteHandler.addVote)
 		.get(pollHandler.loadPoll);
+		
+	app.route('/logged_in', passwordless.acceptToken())
+	    .get(function(req, res) {res.render(path + '/public/index', {loggedIn: true,recents: [],loggedInAs: 'Token' });});
 
 	app.route('/login')
 		.get(function (req, res) { res.sendFile(path + '/public/login.html'); });
