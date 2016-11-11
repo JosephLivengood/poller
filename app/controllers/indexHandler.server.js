@@ -16,6 +16,7 @@ function IndexHandler () {
         var loggedInAs = 'Joseph Livengood';//user.getUsername();
         switch (req.query.category) {
             case 'test':
+                //@TODO: create new pug file to handle category view
                 res.render(path + '/public/index', {loggedIn: true,recents: [],loggedInAs: loggedInAs});
                 break;
             default:
