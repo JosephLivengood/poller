@@ -1,0 +1,2 @@
+db = db connection string (ie. mongodb://admin:admin@db.db.com:41937/db)
+emp = email smtp server password for auth

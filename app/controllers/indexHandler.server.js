@@ -1,7 +1,7 @@
 'use strict';
 
 var mongo = require('mongodb').MongoClient;
-var url = 'mongodb://admin:pass@ds141937.mlab.com:41937/poller'; //'mongodb://localhost:27017/test';
+var url = process.env.db;
 var ObjectId = require('mongodb').ObjectID;
 var path = process.cwd();
 var RecentsHandler = require(path + '/app/controllers/recentsHandler.server.js');
@@ -12,12 +12,12 @@ function IndexHandler () {
     
     this.displayHome = function(req, res) {
         console.log('connected');
-        var isLoggedIn = false;
-        var loggedInAs = 'Joseph Livengood';//user.getUsername();
+        var isLoggedIn = Boolean(req.user);
+        var loggedInAs = req.user;
         switch (req.query.category) {
             case 'test':
                 //@TODO: create new pug file to handle category view
-                res.render(path + '/public/index', {loggedIn: true,recents: [],loggedInAs: loggedInAs});
+                res.render(path + '/public/index', {loggedIn: isLoggedIn,recents: [],loggedInAs: loggedInAs});
                 break;
             default:
                 recentsHandler.getRecentVotes(function(i) {
