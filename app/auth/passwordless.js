@@ -12,20 +12,17 @@ var smtpServer  = email.server.connect({
 var pathToMongoDb = 'mongodb://admin:pass@ds141937.mlab.com:41937/poller';
 
 module.exports = function (app) {
-    console.log('testing');
-   
     passwordless.init(new MongoStore(pathToMongoDb));
-    
     passwordless.addDelivery(
         function(tokenToSend, uidToSend, recipient, callback) {
-            var host = 'localhost:3000';
+            var host = 'https://poll-cloned-backup-livengood.c9users.io/logged_in';
             smtpServer.send({
                 text:    'Hello!\nAccess your account here: http://' 
                 + host + '?token=' + tokenToSend + '&uid=' 
-                + encodeURIComponent(uidToSend), 
+                + encodeURIComponent(uidToSend) +'\n\nRemember, this is your single use individual link!', 
                 from:    'poller.app.auth@gmail.com', 
                 to:      recipient,
-                subject: 'Token for ' + host
+                subject: 'Token Login for Poller!'
             }, function(err, message) { 
                 if(err) {
                     console.log(err);
@@ -33,7 +30,6 @@ module.exports = function (app) {
                 callback(err);
             });
     }); 
-    
     app.use(passwordless.sessionSupport());
     app.use(passwordless.acceptToken({ successRedirect: '/'}));
 };

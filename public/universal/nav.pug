@@ -35,22 +35,31 @@ nav.navbar.navbar-default
 				.form-group
 					input.form-control(type='text', placeholder='Search by POLL-ID#')
 				button.btn.btn-default(type='submit') Submit
+			- if (!loggedIn) {
 			ul.nav.navbar-nav.navbar-right
 				li.dropdown
 					a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-						- if (!loggedIn) {
 						| Login
-						- } else {
-						| #{loggedInAs}	
-						-}
 						span.carot
 					ul.dropdown-menu
 						li
-							a(href='#') Login
+							a(href='/login') Login
 						li
 							a(href='#') Forgot User
 						li
 							a(href='#') Forgot Pass
+			- } else {
+			ul.nav.navbar-nav.navbar-right
+				li.dropdown
+					a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+						| #{loggedInAs}
+						span.carot
+					ul.dropdown-menu
+						li
+							a(href='/logout') Logout
+						li
+							p hi
+			-}
 
 .alert.alert-warning(role='alert')
 	p This site is a WIP. Logins are disabled and multiple voting is enabled for testing!

@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
-app.set('view engine', 'pug'); //Formerly JADE
+app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/public'));
 
 auth(app);

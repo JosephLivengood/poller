@@ -12,12 +12,12 @@ function IndexHandler () {
     
     this.displayHome = function(req, res) {
         console.log('connected');
-        var isLoggedIn = false;
-        var loggedInAs = 'Joseph Livengood';//user.getUsername();
+        var isLoggedIn = Boolean(req.user);
+        var loggedInAs = req.user;
         switch (req.query.category) {
             case 'test':
                 //@TODO: create new pug file to handle category view
-                res.render(path + '/public/index', {loggedIn: true,recents: [],loggedInAs: loggedInAs});
+                res.render(path + '/public/index', {loggedIn: isLoggedIn,recents: [],loggedInAs: loggedInAs});
                 break;
             default:
                 recentsHandler.getRecentVotes(function(i) {
