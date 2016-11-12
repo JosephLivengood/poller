@@ -9,7 +9,7 @@ var smtpServer  = email.server.connect({
    ssl:     true
 });
 
-var pathToMongoDb = 'mongodb://admin:pass@ds141937.mlab.com:41937/poller';
+var pathToMongoDb = process.env.db;
 
 module.exports = function (app) {
     passwordless.init(new MongoStore(pathToMongoDb));
