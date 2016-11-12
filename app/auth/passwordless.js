@@ -17,7 +17,7 @@ module.exports = function (app) {
         function(tokenToSend, uidToSend, recipient, callback) {
             var host = 'https://poll-cloned-backup-livengood.c9users.io/logged_in';
             smtpServer.send({
-                text:    'Hello!\nAccess your account here: http://' 
+                text:    'Hello!\nAccess your account here: ' 
                 + host + '?token=' + tokenToSend + '&uid=' 
                 + encodeURIComponent(uidToSend) +'\n\nRemember, this is your single use individual link!', 
                 from:    'poller.app.auth@gmail.com', 
