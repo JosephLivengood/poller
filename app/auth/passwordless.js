@@ -15,9 +15,9 @@ module.exports = function (app) {
     passwordless.init(new MongoStore(pathToMongoDb));
     passwordless.addDelivery(
         function(tokenToSend, uidToSend, recipient, callback) {
-            var host = 'https://poll-cloned-backup-livengood.c9users.io/logged_in';
+            var host = 'http://http://livepoller.herokuapp.com/logged_in';
             smtpServer.send({
-                text:    'Hello!\nAccess your account here: http://' 
+                text:    'Hello!\nAccess your account here: ' 
                 + host + '?token=' + tokenToSend + '&uid=' 
                 + encodeURIComponent(uidToSend) +'\n\nRemember, this is your single use individual link!', 
                 from:    'poller.app.auth@gmail.com', 
