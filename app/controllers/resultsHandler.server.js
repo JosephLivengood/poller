@@ -30,7 +30,7 @@ function ResultsHandler () {
             	    latestarr.push(latestvotes[i].response);
             	}
             	var latestuniquearr = latestarr.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
-            	res.render(path + '/public/results',{results: aggdata, pollinfo: poll, date: documents[0].date, latest: latestarr, latestunique: latestuniquearr});
+            	res.render(path + '/public/results',{results: aggdata, pollinfo: poll, date: documents[0].date, latest: latestarr, latestunique: latestuniquearr, loggedIn: Boolean(req.user), loggedInAs: req.session.profile});
             });
 		});
     };

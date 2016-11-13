@@ -12,12 +12,9 @@
 * {
   box-sizing: border-box; }
 
-body {
-  font-family: sans-serif; }
-
 .grid {
   margin-top: 30px;
-  background: white;
+  background: transparent;
   max-width: 1200px; }
   .grid:after {
     content: "";
@@ -69,9 +66,122 @@ body {
 .grid-item--height4 {
   height: 420px; }
 
+.login-form-main-message a {
+  color: #444;
+  transition: all ease-in-out 500ms; }
+  .login-form-main-message a:hover {
+    color: #bbb;
+    text-decoration: none; }
+
+.login-form-1 {
+  width: 100%;
+  border-radius: 5px;
+  display: inline-block; }
+
+.main-login-form {
+  position: relative; }
+
+.login-form-1 .form-control {
+  border: 0;
+  box-shadow: 0 0 0;
+  border-radius: 0;
+  background: transparent;
+  color: #555555;
+  padding: 7px 0;
+  font-weight: bold;
+  height: auto; }
+  .login-form-1 .form-control::-webkit-input-placeholder, .login-form-1 .form-control:-moz-placeholder, .login-form-1 .form-control::-moz-placeholder, .login-form-1 .form-control:-ms-input-placeholder {
+    color: #999999; }
+.login-form-1 .form-group {
+  margin-bottom: 0;
+  border-bottom: 2px solid #efefef;
+  padding-right: 20px;
+  position: relative; }
+  .login-form-1 .form-group:last-child {
+    border-bottom: 0; }
+
+.login-group {
+  background: #ffffff;
+  color: #999999;
+  border-radius: 8px;
+  padding: 10px 20px; }
+
+.login-form-1 .login-button {
+  position: absolute;
+  right: -25px;
+  top: 50%;
+  background: #ffffff;
+  color: #999999;
+  padding: 11px 0;
+  width: 50px;
+  height: 50px;
+  margin-top: -25px;
+  border: 5px solid #efefef;
+  border-radius: 50%;
+  transition: all ease-in-out 750ms; }
+  .login-form-1 .login-button:hover {
+    color: #555555;
+    transform: rotate(450deg); }
+  .login-form-1 .login-button.clicked {
+    color: #555555; }
+    .login-form-1 .login-button.clicked:hover {
+      transform: none; }
+    .login-form-1 .login-button.clicked.success {
+      color: #2ecc71; }
+    .login-form-1 .login-button.clicked.error {
+      color: #e74c3c; }
+
+.login-form-main-message {
+  background: #ffffff;
+  color: #999999;
+  border-left: 5px solid transparent;
+  border-radius: 3px;
+  margin-bottom: 8px;
+  margin-top: 6px;
+  height: 0;
+  padding: 0 20px 0 17px;
+  opacity: 0;
+  transition: all ease-in-out 2000ms;
+  width: 90%;
+  margin-left: 5%; }
+  .login-form-main-message.show {
+    height: auto;
+    opacity: 1;
+    padding: 10px 20px 10px 17px; }
+  .login-form-main-message.success {
+    border-left-color: #2ecc71;
+    background-color: rgba(46, 204, 113, 0.03); }
+  .login-form-main-message.info {
+    border-left-color: rgba(89, 208, 255, 0.5);
+    background-color: rgba(89, 208, 255, 0.07); }
+
+.logo {
+  padding: 15px 0;
+  font-size: 30px;
+  color: #666;
+  font-weight: bold; }
+
+.how {
+  font-size: 28px;
+  color: #666;
+  font-style: italic; }
+  .how p {
+    font-size: 20px;
+    color: #888;
+    font-style: normal; }
+
+#login-box {
+  border-radius: 25px;
+  border: 3px solid #d6d6d6;
+  margin-bottom: 100px;
+  padding-bottom: 20px; }
+
+html,
 body {
-  font: 100% Helvetica, sans-serif;
-  color: #333; }
+  padding: 10px;
+  font: 100% "Varela Round";
+  color: #333;
+  background: #efefef; }
 
 .alert {
   width: 80%;
@@ -85,17 +195,21 @@ body {
 .jumbotron {
   margin: 1% 12% 10px 12%;
   padding-bottom: 20px;
-  padding-top: 15px; }
+  padding-top: 15px;
+  background-color: white; }
 
 .navbar {
   min-height: 20px; }
+
+.navbar-brand {
+  font-size: 30px; }
 
 #indexprogress {
   margin: 20px 25% 0px 25%; }
 
 .message, .success, .error, .warning {
   border: 1px solid #ccc;
-  padding: 10px;
+  padding: 5px;
   color: #333; }
 
 .success {

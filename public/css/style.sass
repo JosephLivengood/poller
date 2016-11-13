@@ -1,12 +1,16 @@
 @import poll
 @import grid
+@import login
 
-$font-stack:    Helvetica, sans-serif
+$font-stack: 'Varela Round'
 $primary-color: #333
 
+html,
 body
+    padding: 10px
     font: 100% $font-stack
     color: $primary-color
+    background: #efefef
 
 .alert
     width: 80%
@@ -21,16 +25,20 @@ body
     margin: 1% 12% 10px 12%
     padding-bottom: 20px
     padding-top: 15px
+    background-color: white
     
 .navbar
     min-height: 20px
+
+.navbar-brand
+    font-size: 30px
     
 #indexprogress
     margin: 20px 25% 0px 25%
 
 .message
     border: 1px solid #ccc
-    padding: 10px
+    padding: 5px
     color: $primary-color
 
 .success

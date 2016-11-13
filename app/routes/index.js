@@ -31,12 +31,14 @@ module.exports = function (app) {
 		.get(pollHandler.loadPoll);
 
 	app.route('/login')
-		.get(function (req, res) { res.sendFile(path + '/public/login.html'); });
+		.get(userHandler.loadLogin)
+		.post(passwordless.requestToken(userHandler.sendToken,{failureRedirect: '/login'}), userHandler.tokenSent);
+
+	app.route('/profile')
+		.get(passwordless.restricted({failureRedirect: '/login'}), userHandler.showProfile)
+		.post(passwordless.restricted({failureRedirect: '/login'}), userHandler.updateName);
 
 	app.route('/logged_in', passwordless.acceptToken());
-
-	app.route('/sendtoken')
-		.post(passwordless.requestToken(userHandler.sendToken), function(req, res) { res.sendFile(path + '/public/sent.html') });
  
 	app.route('/logout')
 		.get(passwordless.logout(), function (req, res) { res.redirect('/') });
