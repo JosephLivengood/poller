@@ -10,10 +10,6 @@ nav.navbar.navbar-default
 		#bs-example-navbar-collapse-1.collapse.navbar-collapse
 			ul.nav.navbar-nav
 				li
-					a(href='/')
-						| Home 
-						span.sr-only (current)
-				li
 					a(href='/newpoll') New Poll
 				li.dropdown
 					a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
@@ -37,17 +33,8 @@ nav.navbar.navbar-default
 				button.btn.btn-default(type='submit') Submit
 			- if (!loggedIn) {
 			ul.nav.navbar-nav.navbar-right
-				li.dropdown
-					a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-						| Login
-						span.carot
-					ul.dropdown-menu
-						li
-							a(href='/login') Login
-						li
-							a(href='#') Forgot User
-						li
-							a(href='#') Forgot Pass
+				li
+					a(href='/login') Login
 			- } else {
 			ul.nav.navbar-nav.navbar-right
 				li.dropdown
@@ -56,10 +43,7 @@ nav.navbar.navbar-default
 						span.carot
 					ul.dropdown-menu
 						li
-							a(href='/logout') Logout
+							a(href='/profile') Profile
 						li
-							p hi
+							a(href='/logout') Logout 
 			-}
-
-.alert.alert-warning(role='alert')
-	p This site is a WIP. Logins are disabled and multiple voting is enabled for testing!

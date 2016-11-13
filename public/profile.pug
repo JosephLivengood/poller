@@ -1,0 +1,27 @@
+doctype html
+html(lang="en")
+    head
+        include universal/head
+        include universal/script
+    body
+        include universal/nav
+        .container-fluid
+            .row.top-space
+                .col-sm-6.col-sm-offset-3.col-lg-4.col-lg-offset-4
+                    .text-center
+                        #login-box
+                            .logo Change public name, #{loggedInAs}?
+                            .login-form-1
+                                form#login-form.text-left(action='/profile', method='POST')
+                                    .main-login-form
+                                        .login-group
+                                            .form-group
+                                                label.sr-only(for='user') Username
+                                                input#user.form-control(type='text', name='newuser', placeholder='How do you want others to see you as?')
+                                        button.login-button(type='submit')
+                                            i.fa.fa-chevron-right
+                                -if (nameSent) {
+                                    .login-form-main-message.show.success
+                                        strong Success- 
+                                        | Oh yeaaaaa!
+                                -}

@@ -1,0 +1,47 @@
+doctype html
+html(lang="en")
+    head
+        include universal/head
+        include universal/script
+    body
+        include universal/nav
+        .container-fluid
+            .row.top-space
+                .col-sm-6.col-sm-offset-3.col-lg-4.col-lg-offset-4
+                    .text-center
+                        #login-box
+                            .logo Passwordless Login
+                            .login-form-1
+                                form#login-form.text-left(action='/login', method='POST')
+                                    .main-login-form
+                                        .login-group
+                                            .form-group
+                                                label.sr-only(for='user') Username
+                                                input#user.form-control(type='email', name='user', placeholder='We just need your email...')
+                                        button.login-button(type='submit')
+                                            i.fa.fa-chevron-right
+                                -if (tokenSent) {
+                                    .login-form-main-message.show.success
+                                        strong Success- 
+                                        | Check your email for your login link!
+                                -} else {
+                                    .login-form-main-message.show.info
+                                        | We promise never to share or display your email, but you're welcome to use a 
+                                        a(href='https://securemail.hidemyass.com/') free anonymous email 
+                                        | if you want!
+                                -}
+            .row
+                .text-center
+                    .how How's that work?!
+                        .container-fluid(style='margin-top: 30px;')
+                            .row
+                                .col-md-4
+                                    i.fa.fa-4x.fa-keyboard-o(aria-hidden='true')
+                                    p You type in an email!
+                                .col-md-4
+                                    i.fa.fa-4x.fa-envelope(aria-hidden='true')
+                                    p We email you a unique link!
+                                .col-md-4
+                                    i.fa.fa-4x.fa-link(aria-hidden='true')
+                                    p You click that link and get logged in!
+                        p(style='font-size:18px!important; color:#333; margin-top:30px;') No unsafe password storage on our end, no risk of your information getting out, no effort in coming up with a new password to just forget later!
