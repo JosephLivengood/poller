@@ -20,7 +20,8 @@ function PollHandler () {
                 if (err) console.log(err);
                 console.log(documents[0].question);
                 res.render(path + '/public/poll', {question: documents[0].question,
-                options: documents[0].options, asker: documents[0].posterid, date: documents[0].date});
+                options: documents[0].options, asker: documents[0].posterid, date: documents[0].date,
+                loggedIn: Boolean(req.user), loggedInAs: req.session.profile});
                 db.close();
             });
         });
@@ -28,7 +29,7 @@ function PollHandler () {
     
     this.addPollPage = function(req, res) {
     	recentsHandler.getRecentPolls(function(i) {
-    		res.render(path + '/public/newpoll', {recents: i});
+    		res.render(path + '/public/newpoll', {recents: i, loggedIn: Boolean(req.user), loggedInAs: req.session.profile});
     	});
     };
     
