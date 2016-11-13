@@ -15,7 +15,7 @@ module.exports = function (app) {
     passwordless.init(new MongoStore(pathToMongoDb));
     passwordless.addDelivery(
         function(tokenToSend, uidToSend, recipient, callback) {
-            var host = 'http://http://livepoller.herokuapp.com/logged_in';
+            var host = 'http://livepoller.herokuapp.com/logged_in';
             smtpServer.send({
                 text:    'Hello!\nAccess your account here: ' 
                 + host + '?token=' + tokenToSend + '&uid=' 
