@@ -18,10 +18,14 @@ function PollHandler () {
                 _id: new ObjectId(req.params.pollid)
             }).toArray(function(err,documents){
                 if (err) console.log(err);
-                console.log(documents[0].question);
-                res.render(path + '/public/poll', {question: documents[0].question,
-                options: documents[0].options, asker: documents[0].posterid, date: documents[0].date,
-                loggedIn: Boolean(req.user), loggedInAs: req.session.profile});
+                if (!documents[0]) {
+					res.render(path + '/public/notfound', {loggedIn: Boolean(req.user), loggedInAs: req.session.profile});
+                } else {
+					console.log(documents[0].question);
+					res.render(path + '/public/poll', {question: documents[0].question,
+					options: documents[0].options, asker: documents[0].posterid, date: documents[0].date,
+					loggedIn: Boolean(req.user), loggedInAs: req.session.profile});
+                }
                 db.close();
             });
         });
