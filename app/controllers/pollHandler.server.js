@@ -49,7 +49,7 @@ function PollHandler () {
 			"category": req.body.category,
 			"options": [],
 			"responses": [],
-			"posterid": "Joseph Livengood",
+			"posterid": req.session.profile,
 			"date": new Date()
 		};
 		for (var i = 0; i < optionsarr.length; i++) {
