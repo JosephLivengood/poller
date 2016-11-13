@@ -12,6 +12,10 @@
   size: 12px;
   margin: 0px; }
 
+.progress {
+  background: rgba(99, 94, 94, 0.5);
+  height: 18px; }
+
 #poll-box {
   border-radius: 25px;
   border: 3px solid #d6d6d6;
@@ -159,6 +163,7 @@
     padding: 10px 20px 10px 17px; }
   .login-form-main-message.success {
     border-left-color: #2ecc71;
+    border-left: 5px solid #2ecc71;
     background-color: rgba(46, 204, 113, 0.03); }
   .login-form-main-message.info {
     border-left-color: rgba(89, 208, 255, 0.5);
