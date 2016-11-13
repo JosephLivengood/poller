@@ -2,24 +2,20 @@ doctype html
 html(lang="en")
     head
         include universal/head
-        
     body
-        
         include universal/nav
-        
         block content
-            .main.container
+            .main.container-fluid
                 .row
-                  .col-md-6.col-md-offset-3
-                    center
+                  .col-sm-6.col-sm-offset-3
+                    center#poll-box
                         h2 #{question}
-                        form(method='POST')
+                        form(method='POST').top-space
                             - for(var i = 0; i < options.length; i++) {
                             div.form-group
                                 button.btn.btn-primary#options(type='submit' name='option' value=i) #{options[i].answer}
                             - }
-                        hr
-                        p Asked by user <strong> #{asker} </strong> on #{prettyDate(date)} !
+                        p.top-space Asked by <strong> #{asker} </strong> on #{prettyDate(date)}!
                         
         include universal/script
  

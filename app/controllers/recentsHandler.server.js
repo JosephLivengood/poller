@@ -10,7 +10,7 @@ function RecentsHandler () {
     /*
     *   Inserts voted on QUESTION and ID in capped db collection. Max 300.
     *   Used by vote controller to keep track of recent votes.
-    *   db.createCollection("recentvoted", { capped : true, size : 50000, max : 300 } )
+    *   db.createCollection("recentvoted", { capped : true, size : 1000000, max : 300 } )
     */
     this.justVoted = function(question, id, category) {
         mongo.connect(url,function(err,db) {

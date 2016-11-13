@@ -1,6 +1,6 @@
 //DATA PASSED THROUGH:
 //
-//poll[question, category, posterid, totalrespones]
+//pollinfo[question, category, posterid, totalrespones]
 //results[{id, answer, result},...]
 //date
 //latest[$RESPONSECODE(0/1/2/3/4/5/6/7/8/9),...] 0<length<21 (ie. [1,2,1,1,1,3,3,3,4,2,1,0])
@@ -13,26 +13,33 @@ html(lang="en")
     body
         include universal/nav
         block content
-            .main.container
+            .main.container-fluid
                 .row
-                  .col-md-6.col-md-offset-3
-                    center
+                  .col-sm-6.col-sm-offset-3
+                    center#poll-box
                         h2 #{pollinfo[0]}
-                        p #{pollinfo[4]} Responses!
-                        - for(var i = 0; i < results.length; i++) {
-                        p #{results[i].answer}: #{percentize(results[i].result/pollinfo[3])}% (#{results[i].result})
-                        - }
-                        .progress
-                            .progress-bar.progress-bar-success.active.progress-bar-striped#result1(role='progressbar', style='width:1%')
-                                | #{results[0].answer}
-                            .progress-bar.progress-bar-warning#result2(role='progressbar', style='width:1%')
-                                | #{results[1].answer}
-                            .progress-bar.progress-bar-danger#result3(role='progressbar', style='width:1%')
-                                | #{results[2].answer}
-                        hr
-                        p Asked by user <strong> anon </strong> on #{prettyDate(date)} !
+                        .top-space
+                            .table-responsive(style='width:65%')
+                                table.table.table-striped
+                                    - for(var i = 0; i < results.length; i++) {
+                                    tr
+                                        td <strong>#{results[i].answer}</strong>
+                                        td(style='width:20%').text-center #{percentize(results[i].result/pollinfo[3])}%
+                                        td(style='width:20%').text-center #{results[i].result}
+                                    - }
+                                    tr(style='font-size: 13px')
+                                        td.text-center Total votes:
+                                        td(style='width:20%') 
+                                        td(style='width:20%').text-center #{pollinfo[3]}                        
+                            .progress(style='width:90%;')
+                                .progress-bar.progress-bar-success.active.progress-bar-striped#result1(role='progressbar', style='width:1%')
+                                    | #{results[0].answer}
+                                .progress-bar.progress-bar-warning#result2(role='progressbar', style='width:1%')
+                                    | #{results[1].answer}
+                                .progress-bar.progress-bar-danger#result3(role='progressbar', style='width:1%')
+                                    | #{results[2].answer}
+                            p.top-space-small Asked by <strong> #{pollinfo[2]} </strong> on #{prettyDate(date)}!
         include universal/script
-        //#{pollinfo[2]}
         script.
             test = "#{latest} AND #{latestunique}"
             top1 = "#{percentize(results[0].result/pollinfo[3])}";
