@@ -1,0 +1,51 @@
+doctype html
+html(lang="en")
+    head
+        include universal/head
+    body
+        include universal/nav
+        .main.container-fluid
+            .row
+                .col-sm-10.col-sm-offset-1
+                    center#poll-box
+                        h2 Most Recent
+                        .top-space
+                            .table-responsive(style='width:90%')
+                                table.table.table-striped.table-condensed
+                                    - for(var i = 0; i < polls.length; i++) {
+                                    tr
+                                        td
+                                            a(href="/poll/"+ polls[i]._id) #{polls[i].question}
+                                        td(style='width:10%').text-center #{polls[i].category}
+                                        td(style='width:15%').text-center #{polls[i].posterid}
+                                        td(style='width:15%').text-center #{pretty(polls[i].date)}
+                                    - }
+                                    tr.success
+                                        td.text-center Page #{page}
+                                        td
+                                        td
+                                        td
+                                            a(href="/?category="+cate+"&page="+inc(page)) Next
+        include universal/script
+        
+- function pretty(i) {
+    -x =  new Date(i);
+    -today = new Date();
+    -var y = new Date(today-x);
+    -var yhours = y.getHours();
+    -var yminutes = y.getMinutes();
+    -var ydays = y.getDate()-1;
+    -var ymonths = y.getMonth();
+    -if (ymonths > 0) {
+        -return ymonths+' months ago';
+    -} else if (ydays > 0) {
+        -return ydays+' days ago';
+    -} else if (yhours > 0) {
+        -return yhours+' hours ago';
+    -} else {
+        -return yminutes+' minutes ago';
+    -}
+-}
+- function inc(i) {
+    -return parseInt(i)+1;
+-}

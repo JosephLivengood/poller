@@ -18,9 +18,14 @@ function PollHandler () {
                 _id: new ObjectId(req.params.pollid)
             }).toArray(function(err,documents){
                 if (err) console.log(err);
-                console.log(documents[0].question);
-                res.render(path + '/public/poll', {question: documents[0].question,
-                options: documents[0].options, asker: documents[0].posterid, date: documents[0].date});
+                if (!documents[0]) {
+					res.render(path + '/public/notfound', {loggedIn: Boolean(req.user), loggedInAs: req.session.profile});
+                } else {
+					console.log(documents[0].question);
+					res.render(path + '/public/poll', {question: documents[0].question,
+					options: documents[0].options, asker: documents[0].posterid, date: documents[0].date,
+					loggedIn: Boolean(req.user), loggedInAs: req.session.profile});
+                }
                 db.close();
             });
         });
@@ -28,7 +33,7 @@ function PollHandler () {
     
     this.addPollPage = function(req, res) {
     	recentsHandler.getRecentPolls(function(i) {
-    		res.render(path + '/public/newpoll', {recents: i});
+    		res.render(path + '/public/newpoll', {recents: i, loggedIn: Boolean(req.user), loggedInAs: req.session.profile});
     	});
     };
     
@@ -48,7 +53,7 @@ function PollHandler () {
 			"category": req.body.category,
 			"options": [],
 			"responses": [],
-			"posterid": "Joseph Livengood",
+			"posterid": req.session.profile,
 			"date": new Date()
 		};
 		for (var i = 0; i < optionsarr.length; i++) {
@@ -69,6 +74,38 @@ function PollHandler () {
 			});
 		});
     };
+    
+    this.loadCategory = function(category, page, callback) {
+        mongo.connect(url,function(err,db) {
+			if (err) console.log(err);
+            var collection=db.collection('polls');
+            collection.find(
+				{category: category},
+				{ options: 0, responses: 0 },
+				{sort: {date: -1}}
+			).skip((page-1)*30).limit(30).toArray(function(err, result) {
+                if (err) console.log(err);
+				console.log(result);
+                callback(result, page, category);
+            });
+        });
+    };
+    
+    this.loadMostRecent = function(page, callback) {
+        mongo.connect(url,function(err,db) {
+			if (err) console.log(err);
+            var collection=db.collection('polls');
+            collection.find({},
+				{ options: 0, responses: 0 },
+				{sort: {date: -1}}
+			).skip((page-1)*30).limit(30).toArray(function(err, result) {
+                if (err) console.log(err);
+				console.log(result);
+                callback(result, page);
+            });
+        });
+    };
+    
     
 }
 

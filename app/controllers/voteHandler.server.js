@@ -17,7 +17,7 @@ function VoteHandler () {
             collection.findAndModify(
                 {_id: new ObjectId(req.params.pollid)},
                 [['_id','asc']], //Not needed with a unique id
-                {$push: {responses:{ "responderid": "1", "response": req.body.option}}},
+                {$push: {responses:{ "responderid": req.user, "response": req.body.option}}},
                 {},
                 function(err, object) {
                     if (err) console.log(err);

@@ -15,22 +15,26 @@ function ResultsHandler () {
                 _id: new ObjectId(req.params.pollid)
             }).toArray(function(err,documents){
             	if (err) console.log(err);
-            	var aggdata = documents[0].options;
-            	var poll = [documents[0].question,documents[0].category,documents[0].posterid,documents[0].responses.length];
-            	for (var i = 0; i < aggdata.length; i++) {
-            	    aggdata[i].result = 0;
-            	}
-            	for (var i = 0; i < documents[0].responses.length; i++) {
-            	    aggdata[documents[0].responses[i].response].result++;
-            	}
-            	aggdata.sort(function(a, b) { return (b.result) - (a.result); });
-            	var latestvotes = documents[0].responses.slice(Math.max(documents[0].responses.length - 20,0));
-            	var latestarr = [];
-            	for (var i = 0; i < latestvotes.length; i++) {
-            	    latestarr.push(latestvotes[i].response);
-            	}
-            	var latestuniquearr = latestarr.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
-            	res.render(path + '/public/results',{results: aggdata, pollinfo: poll, date: documents[0].date, latest: latestarr, latestunique: latestuniquearr, loggedIn: Boolean(req.user), loggedInAs: req.session.profile});
+                    if (!documents[0]) {
+					    res.render(path + '/public/notfound', {loggedIn: Boolean(req.user), loggedInAs: req.session.profile});
+                    } else {
+                        var aggdata = documents[0].options;
+                        var poll = [documents[0].question,documents[0].category,documents[0].posterid,documents[0].responses.length];
+                        for (var i = 0; i < aggdata.length; i++) {
+                            aggdata[i].result = 0;
+                        }
+                        for (var i = 0; i < documents[0].responses.length; i++) {
+                            aggdata[documents[0].responses[i].response].result++;
+                        }
+                        aggdata.sort(function(a, b) { return (b.result) - (a.result); });
+                        var latestvotes = documents[0].responses.slice(Math.max(documents[0].responses.length - 20,0));
+                        var latestarr = [];
+                        for (var i = 0; i < latestvotes.length; i++) {
+                            latestarr.push(latestvotes[i].response);
+                        }
+                        var latestuniquearr = latestarr.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
+                        res.render(path + '/public/results',{results: aggdata, pollinfo: poll, date: documents[0].date, latest: latestarr, latestunique: latestuniquearr, loggedIn: Boolean(req.user), loggedInAs: req.session.profile});
+                    }
             });
 		});
     };

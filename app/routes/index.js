@@ -27,7 +27,7 @@ module.exports = function (app) {
 		.get(resultsHandler.sendArrayResults);
 	
 	app.route('/poll/:pollid')
-		.post(voteHandler.addVote)
+		.post(passwordless.restricted({failureRedirect: '/login'}),voteHandler.addVote)
 		.get(pollHandler.loadPoll);
 
 	app.route('/login')
@@ -41,6 +41,6 @@ module.exports = function (app) {
 	app.route('/logged_in', passwordless.acceptToken());
  
 	app.route('/logout')
-		.get(passwordless.logout(), function (req, res) { res.redirect('/') });
+		.get(passwordless.logout(), function (req, res) { res.redirect('/login') });
 
 };
