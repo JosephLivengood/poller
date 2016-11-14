@@ -338,4 +338,25 @@ h2 {
 .warning {
   border-color: yellow; }
 
+@media screen and (max-width: 900px) {
+  .grid-item {
+    width: 100%;
+    height: 60px;
+    font-size: 12px; }
+
+  .grid-item--width2 {
+    width: 100%;
+    height: 60px;
+    font-size: 12px; }
+
+  .grid-item--top {
+    width: 100%;
+    height: 120px;
+    font-size: 12px; }
+
+  .grid-item--height2 {
+    width: 100%;
+    height: 60px;
+    font-size: 12px; } }
+
 /*# sourceMappingURL=style.css.map */
