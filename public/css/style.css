@@ -46,18 +46,23 @@
   border-color: rgba(0, 0, 0, 0.5);
   border-radius: 8px;
   margin: 0.25%;
-  text-align: center; }
+  text-align: center;
+  transition: all ease-in-out 300ms; }
   .grid-item:hover {
     background: #90CAF9;
     border-color: rgba(0, 0, 0, 0.75);
     cursor: pointer; }
   .grid-item a {
-    color: white; }
+    color: black;
+    transition: all ease-in-out 300ms; }
     .grid-item a:hover {
-      color: gray; }
+      color: white; }
+  .grid-item p {
+    font-size: 12px; }
 
 .grid-item--width2 {
-  width: 39.5%; }
+  width: 39.5%;
+  height: 155px; }
 
 .grid-item--gigante {
   width: 39.5%;
@@ -78,6 +83,100 @@
 
 .grid-item--height4 {
   height: 420px; }
+
+.cate_Politics {
+  background: rgba(177, 255, 177, 0.5); }
+  .cate_Politics p {
+    color: rgba(0, 98, 0, 0.7); }
+  .cate_Politics:hover {
+    background: #b1ffb1; }
+    .cate_Politics:hover p {
+      color: rgba(0, 98, 0, 0.5); }
+  .cate_Politics a {
+    color: rgba(0, 98, 0, 0.9);
+    transition: all ease-in-out 300ms; }
+    .cate_Politics a:hover {
+      text-decoration: none;
+      color: #006200; }
+
+.cate_Gaming {
+  background: rgba(183, 245, 255, 0.5); }
+  .cate_Gaming p {
+    color: rgba(0, 73, 85, 0.7); }
+  .cate_Gaming:hover {
+    background: #b7f5ff; }
+    .cate_Gaming:hover p {
+      color: rgba(0, 73, 85, 0.5); }
+  .cate_Gaming a {
+    color: rgba(0, 73, 85, 0.9);
+    transition: all ease-in-out 300ms; }
+    .cate_Gaming a:hover {
+      text-decoration: none;
+      color: #004955; }
+
+.cate_Personal {
+  background: rgba(255, 229, 183, 0.5); }
+  .cate_Personal p {
+    color: rgba(144, 92, 0, 0.7); }
+  .cate_Personal:hover {
+    background: #ffe5b7; }
+    .cate_Personal:hover p {
+      color: rgba(144, 92, 0, 0.5); }
+  .cate_Personal a {
+    color: rgba(144, 92, 0, 0.9);
+    transition: all ease-in-out 300ms; }
+    .cate_Personal a:hover {
+      text-decoration: none;
+      color: #905c00; }
+
+.cate_General {
+  background: rgba(255, 178, 178, 0.5); }
+  .cate_General p {
+    color: rgba(119, 0, 0, 0.7); }
+  .cate_General:hover {
+    background: #ffb2b2; }
+    .cate_General:hover p {
+      color: rgba(119, 0, 0, 0.5); }
+  .cate_General a {
+    color: rgba(119, 0, 0, 0.9);
+    transition: all ease-in-out 300ms; }
+    .cate_General a:hover {
+      text-decoration: none;
+      color: #770000; }
+
+.cate_Suggestions {
+  background: rgba(206, 190, 239, 0.5); }
+  .cate_Suggestions p {
+    color: rgba(61, 31, 123, 0.7); }
+  .cate_Suggestions:hover {
+    background: #cebeef; }
+    .cate_Suggestions:hover p {
+      color: rgba(61, 31, 123, 0.5); }
+  .cate_Suggestions a {
+    color: rgba(61, 31, 123, 0.9);
+    transition: all ease-in-out 300ms; }
+    .cate_Suggestions a:hover {
+      text-decoration: none;
+      color: #3d1f7b; }
+
+.cate_Sponsored {
+  background: rgba(227, 180, 62, 0.5); }
+  .cate_Sponsored p {
+    color: rgba(81, 61, 12, 0.7); }
+  .cate_Sponsored p.sponwarn {
+    color: rgba(227, 180, 62, 0) !important; }
+  .cate_Sponsored:hover {
+    background: #e3b43e; }
+    .cate_Sponsored:hover p {
+      color: rgba(81, 61, 12, 0.5); }
+    .cate_Sponsored:hover p.sponwarn {
+      color: #513d0c !important; }
+  .cate_Sponsored a {
+    color: rgba(81, 61, 12, 0.9);
+    transition: all ease-in-out 300ms; }
+    .cate_Sponsored a:hover {
+      text-decoration: none;
+      color: #513d0c; }
 
 .login-form-main-message a {
   color: #444;

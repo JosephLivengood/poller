@@ -6,10 +6,8 @@ html(lang="en")
     head
         include universal/head
         include universal/script
-        
     body
         include universal/nav
-        
         - if(!loggedIn) {
         div.container
             .jumbotron
@@ -27,34 +25,36 @@ html(lang="en")
                 .grid-sizer
                 - for (var i = 0; i < recents.length; i++) {
                     - if (recents[i].count == max) {
-                    .grid-item.grid-item--top
-                        a(href="/poll/"+ recents[i].id ) #{recents[i].question}
-                        p #{recents[i].category}
+                        .grid-item.grid-item--top(class="cate_" + recents[i].category)
+                            a(href="/poll/"+ recents[i].id ) #{recents[i].question}
+                                p #{recents[i].category}
                     - } else if (recents[i].count >= max/2) {
                         - if(recents[i].count % 2 == 1) {
-                        .grid-item.grid-item--height2
-                            a(href="/poll/"+ recents[i].id ) #{recents[i].question}
-                            p #{recents[i].category}
+                            .grid-item.grid-item--height2(class="cate_" + recents[i].category)
+                                a(href="/poll/"+ recents[i].id ) #{recents[i].question}
+                                    p #{recents[i].category}
                         - } else {
-                        .grid-item.grid-item--width2
-                            a(href="/poll/"+ recents[i].id ) #{recents[i].question}
-                            p #{recents[i].category}
+                            .grid-item.grid-item--width2(class="cate_" + recents[i].category)
+                                a(href="/poll/"+ recents[i].id ) #{recents[i].question}
+                                    p #{recents[i].category}
                         - }
                     - } else {
-                    .grid-item
-                        a(href="/poll/"+ recents[i].id ) #{recents[i].question}
-                        p #{recents[i].category}
+                        .grid-item(class="cate_" + recents[i].category)
+                            a(href="/poll/"+ recents[i].id ) #{recents[i].question}
+                                p #{recents[i].category}
+                    - }
+                    //hard-coded sponsored placements
+                    - if (i==12) {
+                        .grid-item(class="cate_Sponsored")
+                            a(href="https://josephlivengood.github.io/portfolio/") Job hunters <i>hate</i> him! He wins every time with just <strong>one secret</strong>?!
+                                p Sponsored
+                                p.sponwarn <b>THIS WILL SEND YOU TO AN EXTERNAL SITE.</b>
                     - }
                 - }
-                
         script.
             var $grid = $('.grid').masonry({
                 itemSelector: '.grid-item',
                 columnWidth: '.grid-sizer',
                 percentPosition: true,
                 originLeft: false
-            });
-            $grid.on( 'click', '.grid-item', function() {
-                $( this ).toggleClass('grid-item--gigante');
-                $grid.masonry();
             });
