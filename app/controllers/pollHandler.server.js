@@ -75,6 +75,38 @@ function PollHandler () {
 		});
     };
     
+    this.loadCategory = function(category, page, callback) {
+        mongo.connect(url,function(err,db) {
+			if (err) console.log(err);
+            var collection=db.collection('polls');
+            collection.find(
+				{category: category},
+				{ options: 0, responses: 0 },
+				{sort: {date: -1}}
+			).skip((page-1)*30).limit(30).toArray(function(err, result) {
+                if (err) console.log(err);
+				console.log(result);
+                callback(result, page, category);
+            });
+        });
+    };
+    
+    this.loadMostRecent = function(page, callback) {
+        mongo.connect(url,function(err,db) {
+			if (err) console.log(err);
+            var collection=db.collection('polls');
+            collection.find({},
+				{ options: 0, responses: 0 },
+				{sort: {date: -1}}
+			).skip((page-1)*30).limit(30).toArray(function(err, result) {
+                if (err) console.log(err);
+				console.log(result);
+                callback(result, page);
+            });
+        });
+    };
+    
+    
 }
 
 module.exports = PollHandler;
